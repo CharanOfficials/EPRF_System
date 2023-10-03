@@ -47,7 +47,10 @@ router.get('/performance', validateAdmin, validateEmp, (req, res) => {
 router.post('/performance',validateAdmin, (req, res) => {
     adminController.postPerformance(req,res)
 })
+router.get('/performances',validateAdmin, validateEmp, (req, res) => {
+    adminController.viewPerformances(req,res)
+})
 router.use('/',(req, res) => {
     res.send("Invalid route")
 })
-export default router 
+export default router

@@ -153,7 +153,7 @@ export default class AdminController{
                     window.location.href = '/admin/timeline';
                     </script>`)
             }
-            return res.render('./admin/view_employee', {
+            return res.render('./admin/view_employees', {
                 title: "View Employee",
                 menuPartial: "_admin_menu",
                 user: user
@@ -266,6 +266,24 @@ export default class AdminController{
         }catch (err) {
             console.log("Error while submitting the performance review", err)
             return res.status(500).json({error:"Internal server error"})
+        }
+    }
+    async viewPerformances(req, res) {
+        try {
+            const empId = req.query.userid
+            const user = await User.findById(empId).select('first_name last_name')
+            const performances = await Performance.find({ posted_for_user: empId })
+            return res.render('./admin/view_performances', {
+                title: "View Performances",
+                menuPartial: "_admin_menu",
+                user: user,
+                performances:performances
+            })
+        }catch (err) {
+            console.log("Error while getting performances.", err)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/admin/performances'
+            </script>`)
         }
     }
 }

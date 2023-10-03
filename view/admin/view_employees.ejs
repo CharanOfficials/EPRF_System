@@ -47,14 +47,20 @@
                         <td id="custom_col" >
                             <%= u.status %>
                         </td>
-                        <td id="custom_col" >
-                            <%= u.performances.length %>
+                        <td id="custom_col">
+                            <% if (u.performances.length <= 0) { %>
+                                <%= u.performances.length %>
+                                    <% } else { %>
+                                        <a href="/admin/performances?userid=<%= u._id %>">
+                                            <%= u.performances.length %>
+                                        </a>
+                                        <% } %>
                         </td>
                         <td id="custom_col">
                             <a href="/admin/editemployee?userid=<%= u._id %>"><i class="bi bi-pencil"></i></a>
                         </td>
-                        <td id="custom_col" data-id="<%= u._id %>">
-                            <div id="rights"><a href="/admin/toggleRights?userid=<%=u._id%>&status=<%=u.account_type%>"><%= u.account_type %></a></a></div>
+                        <td id="custom_col"">
+                            <div id="rights"><a href="/admin/toggleRights?userid=<%=u._id%>&status=<%=u.account_type%>"><%= u.account_type %></a></div>
                         </td>
                         <td id="custom_col" data-id="<%= u._id %>">
                             <div id="rights">
