@@ -577,6 +577,11 @@ body {
         }
     }
 }
+@media (max-width: 992px) {
+    .user_details {
+        display: none;
+    }
+}
 textarea::-webkit-scrollbar{
     display: none;
 }

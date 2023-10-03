@@ -1,10 +1,8 @@
 import Dept from '../model/department.js'
 import Position from '../model/position.js'
 import User from '../model/user.js'
+import Performance from '../model/performance.js'
 export default class AdminController{
-    constructor() {
-        
-    }
     getDepartment(req, res) {
         res.render('./admin/add_department', {
             title: "Add Department",
@@ -32,8 +30,7 @@ export default class AdminController{
             })
         } catch (err) {
             console.log("Error while adding the department", err)
-            res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            res.status(500).json({error: "Internal server error."})
         }
     }
     async getPosition(req, res) {
@@ -46,8 +43,9 @@ export default class AdminController{
             })
         } catch (err) {
             console.log("Error while adding the position", err)
-            res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/admin/employees'
+            </script>`)
         }
     }
     async postPosition(req, res) {
@@ -80,8 +78,7 @@ export default class AdminController{
             }
         } catch (err) {
             console.log("Error while adding the position", err)
-            res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).json({error:"Internal server error."})
         }
     }
     async getPositions(req, res) {
@@ -99,8 +96,7 @@ export default class AdminController{
             }
         } catch (err) {
             console.log("Error while getting the positions", err)
-            res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).json({error:"Internal server error."})
         }
     }
     async getAddEmployee(req, res) {
@@ -115,8 +111,9 @@ export default class AdminController{
             })
         }catch (err) {
             console.log("Error while getting the add employee", err)
-            res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/admin/employees'
+            </script>`)
         }
     }
     async getEditEmployee(req, res) {
@@ -141,8 +138,9 @@ export default class AdminController{
             })
         }catch (err) {
             console.log("Error while getting edit employee", err)
-            res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/admin/employees'
+            </script>`)
         }
     }
     async viewEmployees(req, res) {
@@ -162,8 +160,9 @@ export default class AdminController{
             })
         }catch (err) {
             console.log("Error while getting employees", err)
-            res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/admin/home'
+            </script>`)
         }
     }
     async postEditEmployee(req, res) {
@@ -188,8 +187,7 @@ export default class AdminController{
             })
         } catch (err) {
             console.log("Error while updating the user", err)
-            res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).json({error:"Internal server error"})
         }
     }
     async deleteEmployee(req, res) {
@@ -201,8 +199,9 @@ export default class AdminController{
             </script>`)
         } catch (err) {
             console.log("Error while deleting employee", err)
-            res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/admin/employees'
+            </script>`)
         }
     }
     async toggleRights(req, res) {
@@ -220,8 +219,9 @@ export default class AdminController{
             </script>`)
         }catch (err) {
             console.log("Error while toggling the rights", err)
-            res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/admin/employees'
+            </script>`)
         }
     }
     async getPerformance(req, res) {
@@ -230,7 +230,6 @@ export default class AdminController{
             const user = await User.findById(userid)
                 .populate({ path: 'department', select: 'dept_name' })
                 .populate({ path: 'position', select: 'pos_name' });
-
             res.render('./admin/add_performance', {
                 title: "Add Performance",
                 menuPartial: "_admin_menu",
@@ -238,11 +237,35 @@ export default class AdminController{
             })
         } catch (err) {
             console.log("Error while toggling the rights", err)
-            res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/admin/employees'
+            </script>`)
         }
     }
     async postPerformance(req, res) {
-        await Performance.create({})
+        try {
+            const posted_by_user = req.userID
+            const p_review = req.body.p_review.trim()
+            const userid = req.body.userid
+            const status = "active"
+            if (p_review.length === 0) {
+                return res.status(400).json({error:"Invalid data."})
+            }
+            const user = await User.findById(userid)
+            const perf = await Performance.create({
+                content: p_review,
+                status: status,
+                posted_by_user: posted_by_user,
+                posted_for_user: userid
+            })
+            user.performances.push(perf)
+            await user.save()
+            if (perf) {
+                return res.status(200).json({success:true, message:"Performance added successfully."})
+            }
+        }catch (err) {
+            console.log("Error while submitting the performance review", err)
+            return res.status(500).json({error:"Internal server error"})
+        }
     }
 }

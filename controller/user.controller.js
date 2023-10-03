@@ -6,9 +6,6 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 // import jwt from 'jsonwebtoken'
 export default class UserController{
-    constructor() {
-        
-    }
     getSignIn(req, res) {
         res.render('sign_in', {
             title:'Sign In'
@@ -47,8 +44,7 @@ export default class UserController{
 
         } catch (err) {
             console.log("Error while log in", err)
-            return res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).json({error:"Internal server error."})
         }
     }
     async getSignUp(req, res) {
@@ -62,8 +58,9 @@ export default class UserController{
             })
         }catch (err) {
             console.log("Error while getting the signUp page", err)
-            return res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/signIn'
+            </script>`)
         }
     }
     async postSignUp(req, res) {
@@ -98,12 +95,11 @@ export default class UserController{
             })
         } catch (err) {
             console.log("Error while signup the user", err)
-            return res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).json({error:"Internal server error."})
         }
     }
     getResetPassword(req, res) {
-        res.render('forgot_password', {
+        return res.render('forgot_password', {
             title:"Forgot Password"
         })
     }
@@ -123,8 +119,7 @@ export default class UserController{
             }
         }catch (err) {
             console.log("Error while resetting the password post.", err)
-            return res.status(500).send(`alert("Internal server error."); 
-            </script>)`)
+            return res.status(500).json({error:"Internal server error."})
         }
     }
     async postLogout(req, res) {
@@ -139,6 +134,6 @@ export default class UserController{
                     </script>`)
             }
         })
-        res.clearCookie('jwt')
+        return res.clearCookie('jwt')
     }
 }

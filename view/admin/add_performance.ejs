@@ -1,5 +1,6 @@
 <main>
     <div class="performance">
+        <input type="hidden" name="userid" id="userid" value="<%=user._id%>">
         <div class="upper_outer">
             <div class="user_details">
                 <div class="emp">Employee Details</div>
@@ -21,10 +22,10 @@
             <div class="performance_review">
                 <div class="sub_performance_review">
                     <div class="emp">Performance Review</div>
-                    <div><button>Submit</button></div>
+                    <div><button id="sub_rev">Submit</button></div>
                 </div>
                 <div>
-                    <textarea name="p_review" cols="30" rows="8"></textarea required></div>
+                    <textarea id="p_review" cols="30" rows="8"></textarea required></div>
                 </div>
         </div>
         <div class="feedback">

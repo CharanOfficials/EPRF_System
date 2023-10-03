@@ -44,7 +44,7 @@ router.get('/toggleRights', validateAdmin, validateEmp, (req, res) => {
 router.get('/performance', validateAdmin, validateEmp, (req, res) => {
     adminController.getPerformance(req,res)
 })
-router.post('/performance', validateAdmin, validateEmp, (req, res) => {
+router.post('/performance',validateAdmin, (req, res) => {
     adminController.postPerformance(req,res)
 })
 router.use('/',(req, res) => {

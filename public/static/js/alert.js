@@ -12,15 +12,7 @@ $('#dept_form').submit(function (event) {
       },
         error: function (xhr, status, error) {
           let response = JSON.parse(xhr.responseText); 
-          console.log(response)
-          if (xhr.status === 409) {
-              alert(response.error);
-          } else if (xhr.status === 400) {
-              alert(response.error)
-          }
-          else {
-                alert('An error occurred');
-          }
+          alert(response.error)
       }
     });
 });
@@ -65,16 +57,7 @@ $('#add_emp_form').submit(function (event) {
     },
       error: function (xhr, status, error) {
         let response = JSON.parse(xhr.responseText);  
-        if (xhr.status === 409) {
-            alert(response.error);
-        } else if (xhr.status === 400) {
-            alert(response.error)
-        } else if (xhr.status === 404) {
-            alert(response.error)
-        }
-        else {
-              alert('An error occurred');
-        }
+        return alert(response.error)
     }
   });
 });
@@ -118,8 +101,9 @@ $(document).ready(function() {
           }));
         });
       },
-      error: function(err) {
-        console.error('Error fetching positions: ' + err);
+      error: function (xhr) {
+      let response = JSON.parse(xhr.responseText);
+      alert(response.error);
       }
     });
   });

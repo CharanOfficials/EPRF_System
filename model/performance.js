@@ -7,7 +7,6 @@ const performanceSchema = mongoose.Schema({
     feedback: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'feedback',
-        required:true
     },
     status: {
         type: String,
@@ -27,5 +26,5 @@ const performanceSchema = mongoose.Schema({
 },{
     timestamps:true
 })
-const Performance = mongoose.Model('performance', performanceSchema)
+const Performance = mongoose.model('performance', performanceSchema)
 export default Performance

@@ -16,11 +16,18 @@ const jwtauth = (req, res, next) => {
     try {
         const payloadjwt = jwt.verify(token, process.env.JWT_SECRET)
         req.userID = payloadjwt.userId // To extract the ID in cart controller
+        console.log(req.userID)
         req.type = payloadjwt.userType
         req.email = payloadjwt.email
     } catch (err) {
         // else return error
-        console.log('JWT middleware:',err)
+        if (err.name === 'TokenExpiredError') {
+            // Handle token expiration error
+            return res.status(401).send(`<script>
+                alert('Token has expired. Please sign in again.');
+                window.location.href = '/signIn';
+                </script>`);
+        }
         return res.status(401)
                 .send(`<script>
                 alert('Unauthorized request are not allowed');

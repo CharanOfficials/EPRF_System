@@ -78,3 +78,31 @@ $('#forgotPassword').on('submit', function (e) {
     }
   })
 })
+$('#sub_rev').on('click', function (e) {
+  e.preventDefault();
+  let p_review = $('#p_review').val();
+  if (p_review.trim().length === 0) {
+    return alert("Review can't be empty")
+  }
+  let userid = $('#userid').val();
+  let requestData = {
+    p_review: p_review,
+    userid: userid
+  };
+  $.ajax({
+  url: '/admin/performance',
+  method: 'POST',
+  contentType: 'application/json',
+  data: JSON.stringify(requestData), 
+  success: function (response) {
+  if (response.success) {
+    alert(response.message);
+    window.location.href = '/admin/employees';
+  }
+    },
+  error: function (xhr) {
+    let response = JSON.parse(xhr.responseText);
+    alert(response.error);
+    }
+  });
+  });

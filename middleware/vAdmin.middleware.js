@@ -22,6 +22,7 @@ const validateAdmin = (req, res, next) => {
                     window.location.href = '/employee/home';
                     </script>`)
         }
+        req.userID = payloadjwt.userId
     } catch (err) {
         // else return error
         console.log('JWT middleware:',err)
