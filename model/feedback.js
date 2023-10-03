@@ -14,7 +14,12 @@ const feedbackSchema = mongoose.Schema({
         enum: ['active', 'deleted'],
         required: true
     },
-    user: {
+    posted_by_user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        required:true
+    },
+    posted_for_user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
         required:true

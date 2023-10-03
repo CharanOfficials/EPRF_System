@@ -3,7 +3,7 @@ $(`.typewriter`).on('click', () => {
   window.location.href = '/signIn';
 })
 // Login Page Controller
-var working = false;
+let working = false;
 $('#login').on('submit', function (e) {
   e.preventDefault();
   if (working) return;
@@ -41,7 +41,7 @@ $('#login').on('submit', function (e) {
     }
   })
 })
-var resetFormWorking = false;
+let resetFormWorking = false;
 $('#forgotPassword').on('submit', function (e) {
   e.preventDefault();
   if (resetFormWorking) return;
@@ -105,4 +105,35 @@ $('#sub_rev').on('click', function (e) {
     alert(response.error);
     }
   });
+});
+$('#sub_fed').on('click', function (e) {
+  e.preventDefault();
+  let f_review = $('#feedback').val();
+  if (f_review.trim().length === 0) {
+    return alert("Feedback can't be empty")
+  }
+  let userid = $('#userid').val();
+  let perf_id = $('#perf_id').val();
+  let requestData = {
+    f_review: f_review,
+    userid: userid,
+    perf_id:perf_id
+  };
+  $.ajax({
+  url: '/admin/feedback',
+  method: 'POST',
+  contentType: 'application/json',
+  data: JSON.stringify(requestData), 
+  success: function (response) {
+  if (response.success) {
+    alert(response.message);
+    window.location.href = '/admin/performances';
+  }
+    },
+  error: function (xhr) {
+    let response = JSON.parse(xhr.responseText);
+    alert(response.error);
+    window.location.href = '/admin/performances';
+    }
   });
+});
