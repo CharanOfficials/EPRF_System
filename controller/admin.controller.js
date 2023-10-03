@@ -224,4 +224,25 @@ export default class AdminController{
             </script>)`)
         }
     }
+    async getPerformance(req, res) {
+        try {
+            const {userid} = req.query
+            const user = await User.findById(userid)
+                .populate({ path: 'department', select: 'dept_name' })
+                .populate({ path: 'position', select: 'pos_name' });
+
+            res.render('./admin/add_performance', {
+                title: "Add Performance",
+                menuPartial: "_admin_menu",
+                user:user
+            })
+        } catch (err) {
+            console.log("Error while toggling the rights", err)
+            res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
+        }
+    }
+    async postPerformance(req, res) {
+        await Performance.create({})
+    }
 }

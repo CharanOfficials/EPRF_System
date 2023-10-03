@@ -41,6 +41,12 @@ router.get('/deleteemployee', validateAdmin, validateEmp, (req, res) => {
 router.get('/toggleRights', validateAdmin, validateEmp, (req, res) => {
     adminController.toggleRights(req,res)
 })
+router.get('/performance', validateAdmin, validateEmp, (req, res) => {
+    adminController.getPerformance(req,res)
+})
+router.post('/performance', validateAdmin, validateEmp, (req, res) => {
+    adminController.postPerformance(req,res)
+})
 router.use('/',(req, res) => {
     res.send("Invalid route")
 })

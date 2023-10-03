@@ -6,6 +6,8 @@
 main {
   min-height: 72vh;
   overflow: scroll;
+  display: flex;
+  justify-content: center;
 }
 
 main::-webkit-scrollbar {
@@ -445,4 +447,117 @@ body {
 }
 .login:not(.loading) button:focus {
   border-bottom-width: 4px;
+}
+
+.main_login {
+  width: 94vw;
+  height: 85vh;
+}
+
+.performance {
+  overflow: scroll;
+  height: 70vh;
+  width: 94vw;
+  color: #2196F3;
+}
+.performance .upper_outer {
+  overflow: scroll;
+  height: 70%;
+  width: 100%;
+  display: flex;
+}
+.performance .upper_outer .emp {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 1.2rem;
+  text-align: center;
+}
+.performance .upper_outer .user_details {
+  overflow: scroll;
+  width: 35%;
+  height: 100%;
+  padding-left: 1.2rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+}
+.performance .upper_outer .user_details label {
+  padding-bottom: 0.3rem;
+}
+.performance .upper_outer .performance_review {
+  overflow: scroll;
+  height: 100%;
+  width: 65%;
+  text-align: center;
+}
+.performance .upper_outer .performance_review .sub_performance_review {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.performance .upper_outer .performance_review .sub_performance_review button {
+  border: none;
+  border: 1px solid #2196F3;
+  color: #2196F3;
+  background-color: transparent;
+  outline: none;
+  font-size: 1.2rem;
+  margin-left: 2rem;
+  margin-top: 1.2rem;
+}
+.performance .upper_outer .performance_review textarea {
+  margin-top: 1rem;
+  width: 95%;
+  height: 95%;
+  border-color: #2196F3;
+  color: #2196F3;
+  outline-color: #2196F3;
+  font-size: 1.2rem;
+}
+.performance .feedback {
+  overflow: scroll;
+  width: 100%;
+  height: 30%;
+}
+.performance .feedback .sub_feedback {
+  display: flex;
+}
+.performance .feedback .sub_feedback textarea {
+  margin-top: 1rem;
+  margin-left: 1.5rem;
+  width: 86%;
+  height: 95%;
+  border-color: #2196F3;
+  color: #2196F3;
+  outline-color: #2196F3;
+  font-size: 1.2rem;
+}
+.performance .feedback .sub_feedback label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.performance::-webkit-scrollbar {
+  display: none;
+}
+
+.performance_review::-webkit-scrollbar {
+  display: none;
+}
+
+.upper_outer::-webkit-scrollbar {
+  display: none;
+}
+
+.user_details::-webkit-scrollbar {
+  display: none;
+}
+
+.feedback::-webkit-scrollbar {
+  display: none;
 }
