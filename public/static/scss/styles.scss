@@ -18,6 +18,9 @@ main::-webkit-scrollbar {
 }
 #custom_col{
     color: $primary;
+    a{
+        text-decoration: none;
+    }
 }
 /* Styling header */
 header {

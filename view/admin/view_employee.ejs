@@ -54,7 +54,7 @@
                             <a href="/admin/editemployee?userid=<%= u._id %>"><i class="bi bi-pencil"></i></a>
                         </td>
                         <td id="custom_col" data-id="<%= u._id %>">
-                            <div id="rights"><%= u.account_type %></div>
+                            <div id="rights"><a href="/admin/toggleRights?userid=<%=u._id%>&status=<%=u.account_type%>"><%= u.account_type %></a></a></div>
                         </td>
                         <td id="custom_col" data-id="<%= u._id %>">
                             <div id="rights">

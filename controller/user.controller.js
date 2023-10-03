@@ -47,7 +47,8 @@ export default class UserController{
 
         } catch (err) {
             console.log("Error while log in", err)
-            res.status(500).json({error:"Internal server error"})
+            return res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
     async getSignUp(req, res) {
@@ -61,7 +62,8 @@ export default class UserController{
             })
         }catch (err) {
             console.log("Error while getting the signUp page", err)
-            res.status(500).json({error:"Internal server error"})
+            return res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
     async postSignUp(req, res) {
@@ -96,7 +98,8 @@ export default class UserController{
             })
         } catch (err) {
             console.log("Error while signup the user", err)
-            res.status(500).json({success:false,error:"Internal server error"})
+            return res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
     getResetPassword(req, res) {
@@ -119,8 +122,9 @@ export default class UserController{
                 return res.status(200).json({success:true,message:"Invalid user."})
             }
         }catch (err) {
-            console.log("Error while resetting the password", err)
-            res.status(500).json({success:false,error:"Internal server error"})
+            console.log("Error while resetting the password post.", err)
+            return res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
     async postLogout(req, res) {

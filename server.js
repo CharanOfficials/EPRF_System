@@ -32,7 +32,18 @@ app.set('layout extractStyles', true)
 app.set('layout extractScripts', true)
 app.use('/', router)
 
-app.listen(3000, () => {
-    console.log("Server is listening at port no. 3000")
-    connectUsingMongoose()
-})
+const startServer = async () => {
+    try {
+        await connectUsingMongoose();
+        app.listen(3000, () => {
+        console.log("Server is listening at port no. 3000");
+    })} catch (error) {
+        console.error("An error occurred:", error);
+        if (mongoose.connection.readyState === 1) {
+        await mongoose.disconnect();
+    }
+        process.exit(1)
+    }
+};
+
+startServer()

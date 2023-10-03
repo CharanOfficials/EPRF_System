@@ -32,7 +32,8 @@ export default class AdminController{
             })
         } catch (err) {
             console.log("Error while adding the department", err)
-            res.status(500).json({error:"Internal server error"})
+            res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
     async getPosition(req, res) {
@@ -45,7 +46,8 @@ export default class AdminController{
             })
         } catch (err) {
             console.log("Error while adding the position", err)
-            res.status(500).json({error:"Internal server error"})
+            res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
     async postPosition(req, res) {
@@ -78,7 +80,8 @@ export default class AdminController{
             }
         } catch (err) {
             console.log("Error while adding the position", err)
-            res.status(500).json({error:"Internal server error"})
+            res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
     async getPositions(req, res) {
@@ -96,7 +99,8 @@ export default class AdminController{
             }
         } catch (err) {
             console.log("Error while getting the positions", err)
-            res.status(500).json({error:"Internal server error"})
+            res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
     async getAddEmployee(req, res) {
@@ -111,7 +115,8 @@ export default class AdminController{
             })
         }catch (err) {
             console.log("Error while getting the add employee", err)
-            res.status(500).json({error:"Internal server error"})
+            res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
     async getEditEmployee(req, res) {
@@ -136,7 +141,8 @@ export default class AdminController{
             })
         }catch (err) {
             console.log("Error while getting edit employee", err)
-            res.status(500).json({error:"Internal server error"})
+            res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
     async viewEmployees(req, res) {
@@ -156,7 +162,8 @@ export default class AdminController{
             })
         }catch (err) {
             console.log("Error while getting employees", err)
-            res.status(500).json({error:"Internal server error"})
+            res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
     async postEditEmployee(req, res) {
@@ -181,7 +188,8 @@ export default class AdminController{
             })
         } catch (err) {
             console.log("Error while updating the user", err)
-            res.status(500).json({success:false,error:"Internal server error"})
+            res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
     async deleteEmployee(req, res) {
@@ -193,7 +201,27 @@ export default class AdminController{
             </script>`)
         } catch (err) {
             console.log("Error while deleting employee", err)
-            res.status(500).json({error:"Internal server error"})
+            res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
+        }
+    }
+    async toggleRights(req, res) {
+        try {
+            const { status, userid } = req.query
+            let updateStatus = "employee"
+            if (status === "admin") {
+                updateStatus = "employee"
+            } else if (status === "employee") {
+                updateStatus = "admin"
+            }
+            await User.findByIdAndUpdate(userid, { account_type: updateStatus })
+            return res.status(200).send(`<script>alert("Rights updated successfully."); 
+            window.location.href = '/admin/employees'
+            </script>`)
+        }catch (err) {
+            console.log("Error while toggling the rights", err)
+            res.status(500).send(`alert("Internal server error."); 
+            </script>)`)
         }
     }
 }

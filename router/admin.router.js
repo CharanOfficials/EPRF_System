@@ -38,6 +38,9 @@ router.post('/editemployee', validateAdmin, empEditValidateRequest, (req, res) =
 router.get('/deleteemployee', validateAdmin, validateEmp, (req, res) => {
     adminController.deleteEmployee(req,res)
 })
+router.get('/toggleRights', validateAdmin, validateEmp, (req, res) => {
+    adminController.toggleRights(req,res)
+})
 router.use('/',(req, res) => {
     res.send("Invalid route")
 })
