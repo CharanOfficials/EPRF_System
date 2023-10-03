@@ -1,0 +1,69 @@
+<main>
+    <div table-responsive custom_table_outer_container>
+        <table class="table caption-top table-striped table-bordered custom_table">
+            <!-- <caption>List of users</caption> -->
+            <thead>
+                <tr>
+                    <th id="custom_col" scope="col">Sr. No.</th>
+                    <th id="custom_col" scope="col">First name</th>
+                    <th id="custom_col" scope="col">Last name</th>
+                    <th id="custom_col" scope="col">Email</th>
+                    <th id="custom_col" scope="col">Contact</th>
+                    <th id="custom_col" scope="col">Emp_id</th>
+                    <th id="custom_col" scope="col">D.O.B</th>
+                    <th id="custom_col" scope="col">Gender</th>
+                    <th id="custom_col" scope="col">Status</th>
+                    <th id="custom_col" scope="col">No. of Performances</th>
+                    <th id="custom_col" scope="col">Edit</th>
+                    <th id="custom_col" scope="col">Toggle Rights</th>
+                    <th id="custom_col" scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% user.forEach((u, index)=> { %>
+                    <tr>
+                        <th id="custom_col" scope="row"><%=index+1%></th>
+                        <td id="custom_col" >
+                            <%= u.first_name %>
+                        </td>
+                        <td id="custom_col" >
+                            <%= u.last_name %>
+                        </td>
+                        <td id="custom_col" >
+                            <%= u.email %>
+                        </td>
+                        <td id="custom_col" >
+                            <%= u.contact_no %>
+                        </td>
+                        <td id="custom_col" >
+                            <%= u.employee_id %>
+                        </td>
+                        <td id="custom_col" >
+                            <%= u.date_of_birth.toLocaleDateString() %>
+                        </td>
+                        <td id="custom_col" >
+                            <%= u.gender %>
+                        </td>
+                        <td id="custom_col" >
+                            <%= u.status %>
+                        </td>
+                        <td id="custom_col" >
+                            <%= u.performances.length %>
+                        </td>
+                        <td id="custom_col">
+                            <a href="/admin/editemployee?userid=<%= u._id %>"><i class="bi bi-pencil"></i></a>
+                        </td>
+                        <td id="custom_col" data-id="<%= u._id %>">
+                            <div id="rights"><%= u.account_type %></div>
+                        </td>
+                        <td id="custom_col" data-id="<%= u._id %>">
+                            <div id="rights">
+                                <a href="/admin/deleteemployee?userid=<%= u._id %>"><i class="bi bi-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+</main>
