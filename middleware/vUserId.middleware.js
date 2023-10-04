@@ -1,5 +1,4 @@
 import User from '../model/user.js'
-
 export const validateEmp = async (req, res, next) => {
     const {userid} = req.query
     if (userid.length !== 24) {

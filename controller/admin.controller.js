@@ -271,18 +271,88 @@ export default class AdminController{
     async viewPerformances(req, res) {
         try {
             const empId = req.query.userid
-            const user = await User.findById(empId).select('first_name last_name')
+
             const performances = await Performance.find({ posted_for_user: empId })
+            .populate('posted_by_user', 'first_name last_name')
+            .populate('posted_for_user', 'first_name last_name')
+            .exec();
             return res.render('./admin/view_performances', {
                 title: "View Performances",
                 menuPartial: "_admin_menu",
-                user: user,
-                performances:performances
+                user: empId,
+                performances: performances
             })
         }catch (err) {
             console.log("Error while getting performances.", err)
             return res.status(500).send(`<script>alert("Internal server error.")
-            window.location.href = '/admin/performances'
+            window.location.href = '/admin/employees'
+            </script>`)
+        }
+    }
+    async postEditPerformance(req, res) {
+        try {
+            const p_review = req.body.p_review.trim()
+            const { perf_id } = req.body
+            const userid = req.userID
+            if (p_review.length === 0) {
+                return res.status(400).json({error:"Invalid data."})
+            }
+            const perf = await Performance.findById(perf_id)
+            if (!perf || perf.feedback) {
+                return res.status(404).json({error:"Invalid request"})
+            }
+            const performances = await Performance.findByIdAndUpdate(perf_id, { content: p_review, posted_by_user: userid })
+            return res.status(200).json({success:true, message:"Review updated successfully"})
+        }catch (err) {
+            console.log("Error while posting edit performance.", err)
+            return res.status(500).json({error:"Internal server error."})
+        }
+    }
+    async getEditPerformance(req, res) {
+        try {
+            const { perf_id } = req.query
+            const perf = await Performance.findById(perf_id)
+            const user = await User.findById(req.userID)
+            if (!perf) {
+                return res.status(404).send(`<script>
+                alert("Invalid performance request.")
+                window.location.href='/admin/employees'
+                </script>`)
+            }
+            return res.render(
+                './admin/edit_performance',
+                {
+                    title: "Edit/ View Performance",
+                    menuPartial:"_admin_menu",
+                    performance: perf,
+                    user:user
+                }
+            )
+        }catch (err) {
+            console.log("Error while getting edit performance.", err)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/admin/employees'
+            </script>`)
+        }
+    }
+    async deletePerformance(req, res){
+        try {
+            const { perf_id } = req.query
+            const delPerf = await Performance.findByIdAndDelete(perf_id)
+            const user = await User.findById(delPerf.posted_for_user)
+            // console.log(delPerf)
+            // console.log(user)
+            user.performances.pull(perf_id)
+            await user.save()
+            if (delPerf) {
+                return res.status(200).send(`<script>alert("Performance deleted successfullt.")
+                window.location.href = '/admin/employees'
+                </script>`)
+            }
+        }catch (err) {
+            console.log("Error while deleting the performance.", err)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/admin/employees'
             </script>`)
         }
     }

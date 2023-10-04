@@ -6,7 +6,6 @@
 main {
   min-height: 72vh;
   overflow: scroll;
-  display: flex;
   justify-content: center;
 }
 
@@ -14,11 +13,16 @@ main::-webkit-scrollbar {
   display: none;
 }
 
+.custom_table_outer_container {
+  overflow: scroll;
+}
+
 .custom_table {
-  max-width: 95vw;
-  margin-left: 2.6rem;
+  max-width: 91vw;
   margin-right: 2.6rem;
-  overflow: hidden;
+  min-width: 94vw;
+  margin-left: 3rem;
+  align-self: center;
 }
 
 #custom_col {
@@ -458,6 +462,7 @@ body {
   overflow: scroll;
   height: 70vh;
   width: 94vw;
+  margin-left: 3rem;
   color: #2196F3;
 }
 .performance .upper_outer {
@@ -564,5 +569,25 @@ textarea::-webkit-scrollbar {
 }
 
 .feedback::-webkit-scrollbar {
+  display: none;
+}
+
+.bi, .feedback_img {
+  font-size: 1.2rem;
+  color: #2196F3;
+}
+
+.icon {
+  text-align: center;
+}
+
+.overflow {
+  max-height: 5rem;
+  max-width: 10rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.overflow::-webkit-scrollbar {
   display: none;
 }

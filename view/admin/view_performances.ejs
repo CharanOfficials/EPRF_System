@@ -10,8 +10,7 @@
                     <th id="custom_col" scope="col">Submitted On</th>
                     <th id="custom_col" scope="col">Performance</th>
                     <th id="custom_col" scope="col">Feedback</th>
-                    <th id="custom_col" scope="col">Add Performance</th>
-                    <th id="custom_col" scope="col">Edit Performance</th>
+                    <th id="custom_col" scope="col">Edit/ View Performance</th>
                     <th id="custom_col" scope="col">Delete Performance</th>
                 </tr>
             </thead>
@@ -22,34 +21,37 @@
                             <%=index+1%>
                         </th>
                         <td id="custom_col">
-                            <%= user.first_name %> <%= user.last_name %>
+                            <%= p.posted_for_user.first_name %> 
+                            <%= p.posted_for_user.last_name %>
                         </td>
                         <td id="custom_col">
                             <%= p.status %>
                         </td>
                         <td id="custom_col">
-                            <%= p.posted_by_user %>
+                            <%= p.posted_by_user.first_name %>
+                            <%= p.posted_by_user.last_name %>
                         </td>
                         <td id="custom_col">
-                            <%= p.createdAt.toLocaleDateString() %>
+                            <%=p.createdAt.toLocaleDateString()%>
                         </td>
                         <td id="custom_col">
-                            <%= p.content %>
+                            <div class="overflow"><%= p.content %></div>
                         </td>
-                        <td id="custom_col">
-                            <%= p.feedback %>
+                        <td id="custom_col" class="icon">
+                            <%if(p.feedback){%>
+                                <i class="fa-regular fa-comments feedback_img"></i>
+                            <%}else{%>
+                                NA
+                                <%}%>
                         </td>
-                        <td id="custom_col">
-                            <a href="/admin/performance?userid=<%= user._id %>"><i class="bi bi-plus-lg"></i></a>
-                        </td>
-                        <td id="custom_col">
-                            <div id="rights"><a href="/admin/performance?userid=<%= user._id %>">
-                            <i class="bi bi-pencil"></i></a>
+                        <td id="custom_col" class="icon">
+                            <div id="rights">
+                                <a href="/admin/editperformance?perf_id=<%=p._id%>"><i class="bi bi-pencil"></i></a></a>
                             </div>
                         </td>
-                        <td id="custom_col">
+                        <td id="custom_col" class="icon">
                             <div id="rights">
-                                <a href="/admin/performance?userid=<%= user._id %>"><i class="bi bi-trash"></i></a>
+                                <a href="/admin/delperformance?perf_id=<%= p._id %>"><i class="bi bi-trash"></i></a>
                             </div>
                         </td>
                     </tr>

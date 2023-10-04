@@ -127,13 +127,47 @@ $('#sub_fed').on('click', function (e) {
   success: function (response) {
   if (response.success) {
     alert(response.message);
-    window.location.href = '/admin/performances';
+    window.location.href = '/admin/employees';
   }
     },
   error: function (xhr) {
     let response = JSON.parse(xhr.responseText);
     alert(response.error);
-    window.location.href = '/admin/performances';
+    window.location.href = '/admin/employees';
     }
   });
+});
+$('#sub_updated_rev').on('click', function (e) {
+  e.preventDefault();
+  let p_review = $('#p_review').val();
+  if (p_review.trim().length === 0) {
+    return alert("Review can't be empty")
+  }
+  let perf_id = $('#perf_id').val();
+  let requestData = {
+    p_review: p_review,
+    perf_id: perf_id
+  };
+  $.ajax({
+  url: '/admin/editperformance',
+  method: 'POST',
+  contentType: 'application/json',
+  data: JSON.stringify(requestData), 
+  success: function (response) {
+  if (response.success) {
+    alert(response.message);
+    window.location.href = '/admin/employees';
+  }
+    },
+  error: function (xhr) {
+    let response = JSON.parse(xhr.responseText);
+    alert(response.error);
+    }
+  });
+});
+$('#edit_rev').on('click', function (e) {
+  e.preventDefault();
+  $(this).prop('disabled', true);
+  $('#sub_updated_rev').prop('disabled', false);
+  $('#p_review').prop('disabled', false);
 });

@@ -5,7 +5,8 @@ import { posValidateRequest } from '../middleware/vPos.middleware.js'
 import validateAdmin from '../middleware/vAdmin.middleware.js'
 import { empEditValidateRequest } from '../middleware/vEmpEdit.middleware.js' 
 import {checkData} from '../middleware/vGetSignUp.middleware.js'
-import {validateEmp} from '../middleware/vUserId.middleware.js'
+import { validateEmp } from '../middleware/vUserId.middleware.js'
+import {validatePerfId} from '../middleware/vPerfId.middleware.js'
 const router = express.Router()
 const adminController = new AdminController()
 router.get('/department', validateAdmin, (req, res) => {
@@ -49,6 +50,15 @@ router.post('/performance',validateAdmin, (req, res) => {
 })
 router.get('/performances',validateAdmin, validateEmp, (req, res) => {
     adminController.viewPerformances(req,res)
+})
+router.get('/editperformance',validateAdmin, validatePerfId, (req, res) => {
+    adminController.getEditPerformance(req,res)
+})
+router.post('/editperformance',validateAdmin, validatePerfId,(req, res) => {
+    adminController.postEditPerformance(req,res)
+})
+router.get('/delperformance', validateAdmin, validatePerfId, (req, res) => {
+    adminController.deletePerformance(req, res)
 })
 router.use('/',(req, res) => {
     res.send("Invalid route")
