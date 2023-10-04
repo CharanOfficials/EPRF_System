@@ -16,9 +16,8 @@ const jwtauth = (req, res, next) => {
     try {
         const payloadjwt = jwt.verify(token, process.env.JWT_SECRET)
         req.userID = payloadjwt.userId // To extract the ID in cart controller
-        console.log(req.userID)
         req.type = payloadjwt.userType
-        req.email = payloadjwt.email
+        req.email = payloadjwt.userEmail
     } catch (err) {
         // else return error
         if (err.name === 'TokenExpiredError') {

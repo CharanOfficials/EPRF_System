@@ -69,8 +69,8 @@
                             <a href="/admin/editemployee?userid=<%= u._id %>"><i class="bi bi-pencil"></i></a>
                         </td>
                         
-                        <td id="custom_col" data-id="<%= u._id %>">
-                            <%if(u.performances.length === 0){%>
+                        <td id="custom_col">
+                            <%if(u.performances.length === 0 && u.account_type === 'employee'){%>
                             <div id="rights">
                                 <a href="/admin/deleteemployee?userid=<%= u._id %>"><i class="bi bi-trash"></i></a>
                             </div>

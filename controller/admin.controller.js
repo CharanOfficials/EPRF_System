@@ -145,7 +145,7 @@ export default class AdminController{
     }
     async viewEmployees(req, res) {
         try {
-            const user = await User.find().select('-password')
+            const user = await User.find({status:'active'}).select('-password')
             if (!user) {
                 return res.status(401)
                 .send(`<script>
@@ -193,7 +193,7 @@ export default class AdminController{
     async deleteEmployee(req, res) {
         try {
             const { userid } = req.query
-            await User.findByIdAndDelete(userid)
+            await User.findByIdAndUpdate(userid, {status:'inactive'})
             res.status(200).send(`<script>alert("User deleted successfully.")
             window.location.href = '/admin/employees'
             </script>`)
@@ -275,7 +275,7 @@ export default class AdminController{
             const performances = await Performance.find({ posted_for_user: empId })
             .populate('posted_by_user', 'first_name last_name')
             .populate('posted_for_user', 'first_name last_name')
-            .exec();
+                .exec();
             return res.render('./admin/view_performances', {
                 title: "View Performances",
                 menuPartial: "_admin_menu",
@@ -340,8 +340,6 @@ export default class AdminController{
             const { perf_id } = req.query
             const delPerf = await Performance.findByIdAndDelete(perf_id)
             const user = await User.findById(delPerf.posted_for_user)
-            // console.log(delPerf)
-            // console.log(user)
             user.performances.pull(perf_id)
             await user.save()
             if (delPerf) {
@@ -351,6 +349,25 @@ export default class AdminController{
             }
         }catch (err) {
             console.log("Error while deleting the performance.", err)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/admin/employees'
+            </script>`)
+        }
+    }
+    async allocatePerf(req, res) {
+        try {
+            const alloc_by = await User.findById(req.userID)
+                .populate('first_name last_name')
+                .populate('department', 'dept_name')
+            const user = await User.find().select('-password').populate('department','dept_name')
+            return res.render('./admin/allocate_performances', {
+                title:'Allocate Performances',
+                menuPartial: '_admin_menu',
+                users: user,
+                allocate_by:alloc_by
+            })
+        }catch (err) {
+            console.log("Error while getting the allocate performances.", err)
             return res.status(500).send(`<script>alert("Internal server error.")
             window.location.href = '/admin/employees'
             </script>`)

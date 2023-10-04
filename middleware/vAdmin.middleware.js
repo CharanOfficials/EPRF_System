@@ -23,6 +23,7 @@ const validateAdmin = (req, res, next) => {
                     </script>`)
         }
         req.userID = payloadjwt.userId
+        req.email = payloadjwt.userEmail
     } catch (err) {
         // else return error
         console.log('JWT middleware:',err)

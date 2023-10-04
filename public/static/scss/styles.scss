@@ -331,7 +331,6 @@ body {
     background: rgba(darken($primary, 40%), 0.85);
 }
 .login {
-
     border-radius: 2px 2px 5px 5px;
     padding: 10px 20px 20px 20px;
     width: 90%;
@@ -490,15 +489,16 @@ body {
     }
 }
 .main_login{
-    width: 94vw; 
+    width: 93vw; 
     height: 85vh;
+    margin-left: 3rem;
 }
 .performance{
     overflow: scroll;
     height: 70vh;
     width: 94vw;
     margin-left: 3rem;
-    // border: 1px blue solid;
+    border: 1px blue solid;
     color: $primary;
     .upper_outer{
         overflow: scroll;
@@ -619,5 +619,103 @@ textarea::-webkit-scrollbar{
     overflow-y: scroll;
 }
 .overflow::-webkit-scrollbar{
+    display: none;
+}
+.allocate_perf{
+    display: flex;
+    // overflow: scroll;
+    height: 60vh;
+    width: 94vw;
+    margin-left: 3rem;
+    color: $primary;
+        select {
+                border: none;
+                color: $primary;
+                background-color: transparent;
+                outline: none;
+                font-size: 1.2rem;
+                margin-top: 1.2rem;
+                text-align: center;
+                padding: 0.3rem;
+                width: 95%;
+        
+                option {
+                    color: $primary;
+                    white-space: pre-line;
+                    width: 95%;
+                    margin-bottom: 0.4rem;
+                    overflow: hidden;
+                    line-break: anywhere;
+                }
+        
+                option:checked {
+                    background-color: #c1d3e4;
+                }
+            }
+        .allocated_by{
+            width: 20%;
+            // border: 1px blue solid;
+            text-align: center;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+        .allocated_scroll{
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+        .allocated{
+            width: 50%;
+            // border: 1px solid blue;
+            text-align: center;
+        }
+        .allocated_to{
+            width: 25%;
+            text-align: center;
+            // border: 1px solid blue;
+            text-align: center;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            .custom-select {
+                    width: 150px;
+                    /* Set your desired width */
+                    overflow: hidden;
+                    /* Hide any overflowing text */
+                }
+            
+                /* Style for the option elements */
+            .custom-select option {
+                white-space: wrap;
+                /* Prevent text from wrapping within options */
+                overflow: hidden;
+                /* Hide any overflowing text within options */
+                text-overflow: ellipsis;
+                /* Display ellipsis (...) for overflowed text */
+            }
+        }
+        label{
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+}        
+#sub_allocation {
+    border: none;
+    border: 1px solid $primary;
+    color: $primary;
+    background-color: transparent;
+    outline: none;
+    font-size: 1.2rem;
+    margin-left: 47%;
+    margin-top: 1.2rem;
+}
+.select_mul::-webkit-scrollbar{
+    display: none;
+}
+.allocated_to::-webkit-scrollbar{
+    display: none;
+}
+.allocated_by::-webkit-scrollbar{
+    display: none;
+}
+.allocated_scroll::-webkit-scrollbar{
     display: none;
 }

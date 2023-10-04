@@ -454,8 +454,9 @@ body {
 }
 
 .main_login {
-  width: 94vw;
+  width: 93vw;
   height: 85vh;
+  margin-left: 3rem;
 }
 
 .performance {
@@ -463,6 +464,7 @@ body {
   height: 70vh;
   width: 94vw;
   margin-left: 3rem;
+  border: 1px blue solid;
   color: #2196F3;
 }
 .performance .upper_outer {
@@ -589,5 +591,102 @@ textarea::-webkit-scrollbar {
 }
 
 .overflow::-webkit-scrollbar {
+  display: none;
+}
+
+.allocate_perf {
+  display: flex;
+  height: 60vh;
+  width: 94vw;
+  margin-left: 3rem;
+  color: #2196F3;
+}
+.allocate_perf select {
+  border: none;
+  color: #2196F3;
+  background-color: transparent;
+  outline: none;
+  font-size: 1.2rem;
+  margin-top: 1.2rem;
+  text-align: center;
+  padding: 0.3rem;
+  width: 95%;
+}
+.allocate_perf select option {
+  color: #2196F3;
+  white-space: pre-line;
+  width: 95%;
+  margin-bottom: 0.4rem;
+  overflow: hidden;
+  line-break: anywhere;
+}
+.allocate_perf select option:checked {
+  background-color: #c1d3e4;
+}
+.allocate_perf .allocated_by {
+  width: 20%;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.allocate_perf .allocated_scroll {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.allocate_perf .allocated {
+  width: 50%;
+  text-align: center;
+}
+.allocate_perf .allocated_to {
+  width: 25%;
+  text-align: center;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  /* Style for the option elements */
+}
+.allocate_perf .allocated_to .custom-select {
+  width: 150px;
+  /* Set your desired width */
+  overflow: hidden;
+  /* Hide any overflowing text */
+}
+.allocate_perf .allocated_to .custom-select option {
+  white-space: wrap;
+  /* Prevent text from wrapping within options */
+  overflow: hidden;
+  /* Hide any overflowing text within options */
+  text-overflow: ellipsis;
+  /* Display ellipsis (...) for overflowed text */
+}
+.allocate_perf label {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#sub_allocation {
+  border: none;
+  border: 1px solid #2196F3;
+  color: #2196F3;
+  background-color: transparent;
+  outline: none;
+  font-size: 1.2rem;
+  margin-left: 47%;
+  margin-top: 1.2rem;
+}
+
+.select_mul::-webkit-scrollbar {
+  display: none;
+}
+
+.allocated_to::-webkit-scrollbar {
+  display: none;
+}
+
+.allocated_by::-webkit-scrollbar {
+  display: none;
+}
+
+.allocated_scroll::-webkit-scrollbar {
   display: none;
 }
