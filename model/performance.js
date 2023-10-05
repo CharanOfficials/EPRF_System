@@ -6,7 +6,7 @@ const performanceSchema = mongoose.Schema({
     },
     feedback: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'feedback',
+        ref: 'feedbacks',
     },
     status: {
         type: String,

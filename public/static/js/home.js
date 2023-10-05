@@ -106,34 +106,32 @@ $('#sub_rev').on('click', function (e) {
     }
   });
 });
-$('#sub_fed').on('click', function (e) {
+$('#fed_btn').on('click', function (e) {
   e.preventDefault();
-  let f_review = $('#feedback').val();
-  if (f_review.trim().length === 0) {
+  let p_feed = $('#p_feed').val();
+  if (p_feed.trim().length === 0) {
     return alert("Feedback can't be empty")
   }
-  let userid = $('#userid').val();
   let perf_id = $('#perf_id').val();
   let requestData = {
-    f_review: f_review,
-    userid: userid,
+    p_feed: p_feed,
     perf_id:perf_id
   };
   $.ajax({
-  url: '/admin/feedback',
+  url: '/employee/feedback',
   method: 'POST',
   contentType: 'application/json',
   data: JSON.stringify(requestData), 
   success: function (response) {
   if (response.success) {
     alert(response.message);
-    window.location.href = '/admin/employees';
+    window.location.href = '/employee/pendingfeedbacks';
   }
     },
   error: function (xhr) {
     let response = JSON.parse(xhr.responseText);
     alert(response.error);
-    window.location.href = '/admin/employees';
+    window.location.href = '/employee/pendingfeedbacks';
     }
   });
 });

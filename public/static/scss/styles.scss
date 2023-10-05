@@ -498,7 +498,7 @@ body {
     height: 70vh;
     width: 94vw;
     margin-left: 3rem;
-    border: 1px blue solid;
+    // border: 1px blue solid;
     color: $primary;
     .upper_outer{
         overflow: scroll;
@@ -565,8 +565,9 @@ body {
             textarea{
                 margin-top: 1rem;
                 margin-left: 1.5rem;
-                width: 86%;
+                width: 78%;
                 height: 95%;
+                margin-right: 1.5rem;
                 border-color: $primary;
                 color: $primary;
                 outline-color: $primary;
@@ -577,6 +578,15 @@ body {
                 font-weight: bold;
                 margin-left: 1rem;
                 margin-top: 0.5rem;
+            }
+            button {
+                border: none;
+                border: 1px solid $primary;
+                color: $primary;
+                background-color: transparent;
+                outline: none;
+                font-size: 1.2rem;
+                margin-top: 75%;
             }
         }
     }

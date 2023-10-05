@@ -18,14 +18,9 @@ const feedbackSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
         required:true
-    },
-    posted_for_user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
-        required:true
     }
 }, {
     timestamps:true
 })
-const Performance = mongoose.model('feedback', feedbackSchema)
+const Performance = mongoose.model('feedbacks', feedbackSchema)
 export default Performance

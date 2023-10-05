@@ -354,6 +354,32 @@ export default class AdminController{
             </script>`)
         }
     }
+    async getFeedback(req, res) {
+        try {
+            const user = req.userID
+            const { perf_id } = req.query
+            const performance = await Performance.findById(perf_id).populate('feedback', 'content')
+            // if (performance.feedback) {
+            //     return res.status(200).send(`<script>alert("Feedback already submitted")
+            //     window.location.href = "/employee/pendingfeedbacks"
+            //     </script>`)
+            // }
+            const userD = await User.findById(user).select('-password')
+                .populate({ path: 'department', select: 'dept_name' })
+                .populate({ path: 'position', select: 'pos_name' });
+            return res.render('./admin/view_feedback', {
+                title: "Add Feedback",
+                menuPartial: "_admin_menu",
+                user: userD,
+                performance:performance
+            })
+        } catch (err) {
+            console.log("Error while getting the employee feedback.", err)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/employee/viewemployees'
+            </script>`)
+        }
+    }
     async allocatePerf(req, res) {
         try {
             const alloc_by = await User.findById(req.userID)

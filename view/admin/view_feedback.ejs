@@ -32,12 +32,7 @@
         <div class="feedback">
             <div class="sub_feedback">
                 <label>Feedback:</label>
-                <%if(performance.feedback){%>
                     <textarea name="feedback" cols="40" rows="4" disabled><%=performance.feedback.content%></textarea>
-                    <%}else{%>
-                        <textarea name="feedback" id="p_feed" cols="40" rows="4"></textarea>
-                        <div><button id="fed_btn">Submit</button></div>
-                <%}%>
             </div>
         </div>
     </div>

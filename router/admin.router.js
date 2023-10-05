@@ -63,6 +63,9 @@ router.get('/delperformance', validateAdmin, validatePerfId, (req, res) => {
 router.get('/allocateperformances', validateAdmin, (req, res) => {
     adminController.allocatePerf(req, res)
 })
+router.get('/feedback', validateAdmin, (req, res) => {
+    adminController.getFeedback(req,res)
+})
 router.use('/',(req, res) => {
     res.send("Invalid route")
 })

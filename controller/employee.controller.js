@@ -2,51 +2,71 @@ import User from "../model/user.js"
 import Feedback from '../model/feedback.js'
 import Performance from "../model/performance.js"
 export default class EmployeeController{
+    async pendingFeedbacks(req, res) {
+        try {
+            const user = req.userID
+            const userD = await User.findById(user).select('first_name last_name')
+            const performances = await Performance.find({ posted_for_user: user })
+                .populate('feedback', 'content')
+                .populate('posted_by_user', 'first_name last_name')
+            return res.render('./employee/view_pending_feedbacks', {
+                menuPartial: '_emp_menu',
+                title:'View Feedbacks',
+                performances: performances,
+                userD:userD
+            })
+        } catch (err){
+            console.log("Error while getting the employee pending feedbacks", err)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/employee/home'
+            </script>`)
+        }
+    }
     async getFeedback(req, res) {
         try {
-            const { userid, perf_id } = req.query
-            const performance = await Performance.findById(perf_id)
-            if (performance.feedback) {
-                return res.status(200).send(`<script>alert("Feedback already submitted")
-                window.location.href = "/employee/performances"
-                </script>`)
-            }
-            const user = await User.findById(userid)
+            const user = req.userID
+            const { perf_id } = req.query
+            const performance = await Performance.findById(perf_id).populate('feedback', 'content')
+            // if (performance.feedback) {
+            //     return res.status(200).send(`<script>alert("Feedback already submitted")
+            //     window.location.href = "/employee/pendingfeedbacks"
+            //     </script>`)
+            // }
+            const userD = await User.findById(user).select('-password')
                 .populate({ path: 'department', select: 'dept_name' })
                 .populate({ path: 'position', select: 'pos_name' });
-            return res.render('./employee/performances', {
+            return res.render('./employee/add_feedback', {
                 title: "Add Feedback",
-                menuPartial: "_employee_menu",
-                user: user,
-                performances:performance
+                menuPartial: "_emp_menu",
+                user: userD,
+                performance:performance
             })
         } catch (err) {
-            console.log("Error while toggling the rights", err)
+            console.log("Error while getting the employee feedback.", err)
             return res.status(500).send(`<script>alert("Internal server error.")
-            window.location.href = '/employee/performances'
+            window.location.href = '/employee/pendingfeedbacks'
             </script>`)
         }
     }
     async postFeedback(req, res) {
         try {
             const posted_by_user = req.userID
-            const f_review = req.body.f_review.trim()
-            const {userid, perf_id} = req.body
+            const p_feed = req.body.p_feed.trim()
+            const {perf_id} = req.body
             const status = "active"
-            if (f_review.length === 0) {
+            if (p_feed.length === 0) {
                 return res.status(400).json({error:"Invalid data."})
             }
-            const user = await User.findById(userid)
+            // const user = await User.findById(userid)
             const performance = await Performance.findById(perf_id)
             if (!performance) {
-                return req.status(400).json("Invalid Feedback.")
+                return req.status(400).json("Invalid Performance.")
             }
             const feed = await Feedback.create({
-                content: f_review,
+                content: p_feed,
                 performance:perf_id,
                 status: status,
-                posted_by_user: posted_by_user,
-                posted_for_user: userid
+                posted_by_user: posted_by_user
             })
             performance.feedback = feed
             await performance.save()

@@ -15,7 +15,7 @@ const validateAdmin = (req, res, next) => {
     // If token then check validity
     try {
         const payloadjwt = jwt.verify(token, process.env.JWT_SECRET)
-        if (!(payloadjwt.userType === "admin")) {
+        if (payloadjwt.userType !== "admin") {
             return res.status(401)
                 .send(`<script>
                 alert('Unauthorized request are not allowed');
@@ -24,6 +24,8 @@ const validateAdmin = (req, res, next) => {
         }
         req.userID = payloadjwt.userId
         req.email = payloadjwt.userEmail
+        // If valid call next
+        next()
     } catch (err) {
         // else return error
         console.log('JWT middleware:',err)
@@ -33,8 +35,6 @@ const validateAdmin = (req, res, next) => {
                     window.location.href = '/signIn';
                     </script>`)
     }
-    // If valid call next
-    next()
 }
 
 export default validateAdmin

@@ -39,7 +39,9 @@
                         </td>
                         <td id="custom_col" class="icon">
                             <%if(p.feedback){%>
-                                <i class="fa-regular fa-comments feedback_img"></i>
+                                <a href="/admin/feedback?perf_id=<%=p._id%>">
+                                    <i class="fa-regular fa-comments feedback_img"></i>
+                                </a>
                             <%}else{%>
                                 NA
                                 <%}%>
@@ -51,7 +53,11 @@
                         </td>
                         <td id="custom_col" class="icon">
                             <div id="rights">
+                                <%if(!p.feedback){%>
                                 <a href="/admin/delperformance?perf_id=<%= p._id %>"><i class="bi bi-trash"></i></a>
+                                <%}else{%>
+                                    NA
+                                <%}%>
                             </div>
                         </td>
                     </tr>

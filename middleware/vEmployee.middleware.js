@@ -15,13 +15,17 @@ const validateEmployee = (req, res, next) => {
     // If token then check validity
     try {
         const payloadjwt = jwt.verify(token, process.env.JWT_SECRET)
-        if (!(payloadjwt.userType === "employee")) {
+        if ((payloadjwt.userType !== "employee")) {
             return res.status(401)
                 .send(`<script>
                 alert('Unauthorized request are not allowed');
                     window.location.href = '/admin/home';
                     </script>`)
         }
+        req.userID = payloadjwt.userId
+        req.email = payloadjwt.userEmail
+        // If valid call next
+        next()
     } catch (err) {
         // else return error
         console.log('JWT middleware:',err)
@@ -31,8 +35,6 @@ const validateEmployee = (req, res, next) => {
                     window.location.href = '/signIn';
                     </script>`)
     }
-    // If valid call next
-    next()
 }
 
 export default validateEmployee
