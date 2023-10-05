@@ -36,6 +36,12 @@ router.get('/', (req, res) => {
     res.send("Welcome home")
 })
 router.use('/', (req, res) => {
-    res.send("This page doen't exist")
+    res.status(404);
+    res.send(`
+        <script>
+            alert("This page doesn't exist");
+            window.history.back();
+        </script>
+    `);
 })
 export default router

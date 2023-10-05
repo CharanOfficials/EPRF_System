@@ -11,8 +11,6 @@ $('#login').on('submit', function (e) {
   var $this = $(this),
   $state = $this.find('button > .state');
   $this.addClass('loading');
-
-  // Add a JSON call to create/session
   $.ajax({
     type: 'POST',
     url: '/signIn',
@@ -24,7 +22,7 @@ $('#login').on('submit', function (e) {
         document.getElementById('login').reset()
         alert(response.message);
         $state.html('Log in');
-        // window.location.href = '/home/employee';
+        window.location.href = response.redirect;
       } else {
         working = false;
         $this.removeClass('loading');
@@ -169,3 +167,64 @@ $('#edit_rev').on('click', function (e) {
   $('#sub_updated_rev').prop('disabled', false);
   $('#p_review').prop('disabled', false);
 });
+$('#multiselect').on('change', function () {
+  var selectedOptions = $(this).val();
+  $('#multiselect option').prop('disabled', false);
+  if (selectedOptions && selectedOptions.length > 2) {
+    $('#multiselect').val([])
+    alert("Only two options can be selected")
+  }
+});
+
+$(document).ready(function () {
+    var $dropdown = $('#dropdown');
+    var $multiselect = $('#multiselect');
+    $dropdown.on('change', function () {
+        var selectedOption = $(this).val();
+        var options = $multiselect.val();
+        if (options.includes(selectedOption)) {
+            alert('Allocated to is present in allocated.');
+        }
+    });
+});
+$('#sub_allocation').on('click', function (e) {
+  e.preventDefault();
+  console.log("Clicked")
+  var $dropdown = $('#dropdown');
+  var $multiselect = $('#multiselect');
+  var selectedOption = $dropdown.val();
+  var options = $multiselect.val();
+  if (options.includes(selectedOption)) {
+      alert('Allocated to is present in allocated.');
+  } else {
+  var selectedOptions = $('#multiselect').find('option:selected');
+  var allocToValue = selectedOptions.map(function() {
+    var option = $(this);
+    return {
+        alloc: option.data("alloc")
+    };
+}).get();
+  var allocatedValue = $dropdown.find('option:selected').data("alloc_to");
+  var requestData = {
+      dropdown: allocatedValue,
+      multiselect: allocToValue
+  };
+  $.ajax({
+      url: '/admin/allocparticipation',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(requestData),
+    success: function (response) {
+          if (response.success) {
+              alert(response.message);
+              window.location.href = '/admin/employees';
+          }
+      },
+    error: function (xhr) {
+          let response = JSON.parse(xhr.responseText);
+          alert(response.error);
+      }
+  });
+}
+});
+

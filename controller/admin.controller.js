@@ -2,6 +2,7 @@ import Dept from '../model/department.js'
 import Position from '../model/position.js'
 import User from '../model/user.js'
 import Performance from '../model/performance.js'
+import Participation from '../model/participations.js'
 export default class AdminController{
     getDepartment(req, res) {
         res.render('./admin/add_department', {
@@ -380,23 +381,51 @@ export default class AdminController{
             </script>`)
         }
     }
-    async allocatePerf(req, res) {
+    async getAllocParticipation(req, res) {
         try {
             const alloc_by = await User.findById(req.userID)
                 .populate('first_name last_name')
                 .populate('department', 'dept_name')
             const user = await User.find().select('-password').populate('department','dept_name')
-            return res.render('./admin/allocate_performances', {
-                title:'Allocate Performances',
+            return res.render('./admin/review_participation', {
+                title:'Review Participation',
                 menuPartial: '_admin_menu',
                 users: user,
                 allocate_by:alloc_by
             })
         }catch (err) {
-            console.log("Error while getting the allocate performances.", err)
+            console.log("Error while getting the Review Participation.", err)
             return res.status(500).send(`<script>alert("Internal server error.")
             window.location.href = '/admin/employees'
             </script>`)
+        }
+    }
+    async postAllocParticipation(req, res) {
+        try {
+            const fromUser = req.userID;
+            const { dropdown, multiselect } = req.body;
+            const alloc = multiselect
+                .filter(alloc => alloc.alloc && alloc.alloc.length === 24)
+                .map(alloc => alloc.alloc)
+            if (alloc.length === 0) {
+                return res.status(404).json({error:"Empty allocations are not allowed."})
+            }
+            const partResult = await Participation.findOne({ allocatee: dropdown }).
+                populate('allocatee', 'first_name last_name')
+            if (!partResult && alloc.length > 0) {
+                const participated = await Participation.create({
+                    allocatee: dropdown,
+                    allocater: fromUser,
+                    allocated: alloc
+                });
+
+                return res.status(200).json({ success: true, message: "Allocations done successfully" })
+            } else if(partResult) {
+                return res.status(409).json({ error: `Ask ${partResult.allocatee.first_name} ${partResult.allocatee.last_name} to clear previous pending performances first.` })
+            }
+        }catch (err) {
+            console.log("Error while adding the department", err)
+            res.status(500).json({ error: "Internal server error." })
         }
     }
 }

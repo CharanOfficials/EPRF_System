@@ -15,6 +15,12 @@ router.post('/feedback', validateEmployee, (req, res) => {
     employeeController.postFeedback(req,res)
 })
 router.use('/', (req, res) => {
-    res.status(500).json({error:"Invalid Request."})
+    res.status(404);
+    res.send(`
+        <script>
+            alert("This page doesn't exist");
+            window.history.back();
+        </script>
+    `);
 })
 export default router

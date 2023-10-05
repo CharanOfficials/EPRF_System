@@ -32,9 +32,9 @@ export default class UserController{
                         expiresIn: "1h"
                     }
                 )
-                let redirect = "/admin/home"
+                let redirect = "/admin/employees"
                 if (account_type === 'employee') {
-                    redirect = "/employee/home"
+                    redirect = "/employee/pendingfeedbacks"
                 }
                 res.cookie('jwt', token, { httpOnly: true })
                 return res.status(200).json({success:true, message:"Login successful", token:token, redirect:redirect})   
@@ -66,7 +66,6 @@ export default class UserController{
     async postSignUp(req, res) {
         try {
             const password = passGen.passGen(12)
-            console.log(password)
             const encPassword = await passGen.crypt(password)
             if (!encPassword) {
                 res.status(500).json({ error: "Unable to create user." });

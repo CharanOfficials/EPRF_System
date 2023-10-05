@@ -60,13 +60,22 @@ router.post('/editperformance',validateAdmin, validatePerfId,(req, res) => {
 router.get('/delperformance', validateAdmin, validatePerfId, (req, res) => {
     adminController.deletePerformance(req, res)
 })
-router.get('/allocateperformances', validateAdmin, (req, res) => {
-    adminController.allocatePerf(req, res)
-})
 router.get('/feedback', validateAdmin, (req, res) => {
     adminController.getFeedback(req,res)
 })
-router.use('/',(req, res) => {
-    res.send("Invalid route")
+router.get('/allocparticipation', validateAdmin, (req, res) => {
+    adminController.getAllocParticipation(req, res)
+})
+router.post('/allocparticipation', validateAdmin, (req, res)=>{
+    adminController.postAllocParticipation(req, res)
+})
+router.use('/', (req, res) => {
+    res.status(404);
+    res.send(`
+        <script>
+            alert("This page doesn't exist");
+            window.history.back();
+        </script>
+    `);
 })
 export default router
