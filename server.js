@@ -17,7 +17,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure:true
+        secure: true,
+        httpOnly: true
     }
 }))
 app.use(express.static(path.join(path.resolve(), 'public')))
