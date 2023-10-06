@@ -1,15 +1,17 @@
-import session from 'express-session'
+import session from 'express-session' // Use session to store cookie
 import cookieParser from 'cookie-parser'
-import dotenv from 'dotenv'
+import dotenv from 'dotenv' //to store env variables
 import express from 'express'
-import { connectUsingMongoose } from './config/mongoose.js'
+import { connectUsingMongoose } from './config/mongoose.js' // mongoose connection for db
 import expressEjsLayouts from 'express-ejs-layouts' 
-import router from './router/index.router.js'
-import path from 'path'
-
+import router from './router/index.router.js' //main router
+import path from 'path' // To resolve paths
+// server instance
 const app = express()
+// To parse the cookie
 app.use(cookieParser())
 dotenv.config() // To enable environment variables
+// To store JWT in cookie 
 app.use(session({
     secret: process.env.JWT_SECRET,
     resave: false,
@@ -30,8 +32,8 @@ app.use(expressEjsLayouts) // To let server to load layout.ejs
 // to add css and scripts under views in layout.ejs
 app.set('layout extractStyles', true) 
 app.set('layout extractScripts', true)
-app.use('/', router)
-
+app.use('/', router) // To route to the index page
+// To start server after DB connection only
 const startServer = async () => {
     try {
         await connectUsingMongoose();

@@ -2,6 +2,7 @@ import User from "../model/user.js"
 import Feedback from '../model/feedback.js'
 import Performance from "../model/performance.js"
 export default class EmployeeController{
+    // get all employee specific feedbacks in employee login
     async pendingFeedbacks(req, res) {
         try {
             const user = req.userID
@@ -22,6 +23,7 @@ export default class EmployeeController{
             </script>`)
         }
     }
+    // get add feedback page
     async getFeedback(req, res) {
         try {
             const user = req.userID
@@ -43,6 +45,7 @@ export default class EmployeeController{
             </script>`)
         }
     }
+    // add feedback against specific performance
     async postFeedback(req, res) {
         try {
             const posted_by_user = req.userID

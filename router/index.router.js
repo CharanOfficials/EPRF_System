@@ -33,7 +33,7 @@ router.get('/logout', (req, res) =>{
 router.use('/admin', adminRouter)
 router.use('/employee', employeeRouter)
 router.get('/', (req, res) => {
-    res.send("Welcome home")
+    res.render('home')
 })
 router.use('/', (req, res) => {
     res.status(404);

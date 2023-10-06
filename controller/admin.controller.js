@@ -4,12 +4,14 @@ import User from '../model/user.js'
 import Performance from '../model/performance.js'
 import Participation from '../model/participations.js'
 export default class AdminController{
+    // To retrive the department page
     getDepartment(req, res) {
         res.render('./admin/add_department', {
             title: "Add Department",
             menuPartial:"_admin_menu"
         })
     }
+    // check for duplicate and add department
     async postDepartment(req, res) {
         try {
             const department = await Dept.findOne({ 'dept_name': req.body.depName })
@@ -34,6 +36,7 @@ export default class AdminController{
             res.status(500).json({error: "Internal server error."})
         }
     }
+    // get position
     async getPosition(req, res) {
         try {
             const department = await Dept.find({})
@@ -49,6 +52,7 @@ export default class AdminController{
             </script>`)
         }
     }
+    // check for duplicate and add position 
     async postPosition(req, res) {
         try {
             const id = req.body.deptId
@@ -82,6 +86,7 @@ export default class AdminController{
             return res.status(500).json({error:"Internal server error."})
         }
     }
+    // to dynamically check fetch the position against the departmment selected in add employee pages 
     async getPositions(req, res) {
         try {
             const id = req.query.departmentId
@@ -100,6 +105,7 @@ export default class AdminController{
             return res.status(500).json({error:"Internal server error."})
         }
     }
+    // to get add employee
     async getAddEmployee(req, res) {
         try {
             const department = await Dept.find()
@@ -117,6 +123,7 @@ export default class AdminController{
             </script>`)
         }
     }
+    // get employee view in edit mode after check  the availability of at least one department and position
     async getEditEmployee(req, res) {
         try {
             const department = await Dept.find()
@@ -144,28 +151,7 @@ export default class AdminController{
             </script>`)
         }
     }
-    async viewEmployees(req, res) {
-        try {
-            const user = await User.find({status:'active'}).select('-password')
-            if (!user) {
-                return res.status(401)
-                .send(`<script>
-                alert('No user found');
-                    window.location.href = '/admin/timeline';
-                    </script>`)
-            }
-            return res.render('./admin/view_employees', {
-                title: "View Employee",
-                menuPartial: "_admin_menu",
-                user: user
-            })
-        }catch (err) {
-            console.log("Error while getting employees", err)
-            return res.status(500).send(`<script>alert("Internal server error.")
-            window.location.href = '/admin/home'
-            </script>`)
-        }
-    }
+    // submit updated employee details
     async postEditEmployee(req, res) {
         try {
             const { id, fName, lName, contact, dob, gender, qualification } = req.body
@@ -191,6 +177,30 @@ export default class AdminController{
             return res.status(500).json({error:"Internal server error"})
         }
     }
+    // get all employees
+    async viewEmployees(req, res) {
+        try {
+            const user = await User.find({status:'active'}).select('-password')
+            if (!user) {
+                return res.status(401)
+                .send(`<script>
+                alert('No user found');
+                    window.location.href = '/admin/timeline';
+                    </script>`)
+            }
+            return res.render('./admin/view_employees', {
+                title: "View Employee",
+                menuPartial: "_admin_menu",
+                user: user
+            })
+        }catch (err) {
+            console.log("Error while getting employees", err)
+            return res.status(500).send(`<script>alert("Internal server error.")
+            window.location.href = '/admin/home'
+            </script>`)
+        }
+    }
+    // delete employee
     async deleteEmployee(req, res) {
         try {
             const { userid } = req.query
@@ -205,6 +215,7 @@ export default class AdminController{
             </script>`)
         }
     }
+    // make adminn to employee and vice versa
     async toggleRights(req, res) {
         try {
             const { status, userid } = req.query
@@ -225,6 +236,7 @@ export default class AdminController{
             </script>`)
         }
     }
+    // get add performance page against an employee
     async getPerformance(req, res) {
         try {
             const {userid} = req.query
@@ -243,6 +255,7 @@ export default class AdminController{
             </script>`)
         }
     }
+    // add a new performance against an employee
     async postPerformance(req, res) {
         try {
             const posted_by_user = req.userID
@@ -269,6 +282,7 @@ export default class AdminController{
             return res.status(500).json({error:"Internal server error"})
         }
     }
+    // get all the performances available against an employee
     async viewPerformances(req, res) {
         try {
             const empId = req.query.userid
@@ -290,25 +304,7 @@ export default class AdminController{
             </script>`)
         }
     }
-    async postEditPerformance(req, res) {
-        try {
-            const p_review = req.body.p_review.trim()
-            const { perf_id } = req.body
-            const userid = req.userID
-            if (p_review.length === 0) {
-                return res.status(400).json({error:"Invalid data."})
-            }
-            const perf = await Performance.findById(perf_id)
-            if (!perf || perf.feedback) {
-                return res.status(404).json({error:"Invalid request"})
-            }
-            const performances = await Performance.findByIdAndUpdate(perf_id, { content: p_review, posted_by_user: userid })
-            return res.status(200).json({success:true, message:"Review updated successfully"})
-        }catch (err) {
-            console.log("Error while posting edit performance.", err)
-            return res.status(500).json({error:"Internal server error."})
-        }
-    }
+    // get edit performance
     async getEditPerformance(req, res) {
         try {
             const { perf_id } = req.query
@@ -336,6 +332,27 @@ export default class AdminController{
             </script>`)
         }
     }
+    // save edited performance
+    async postEditPerformance(req, res) {
+        try {
+            const p_review = req.body.p_review.trim()
+            const { perf_id } = req.body
+            const userid = req.userID
+            if (p_review.length === 0) {
+                return res.status(400).json({error:"Invalid data."})
+            }
+            const perf = await Performance.findById(perf_id)
+            if (!perf || perf.feedback) {
+                return res.status(404).json({error:"Invalid request"})
+            }
+            const performances = await Performance.findByIdAndUpdate(perf_id, { content: p_review, posted_by_user: userid })
+            return res.status(200).json({success:true, message:"Review updated successfully"})
+        }catch (err) {
+            console.log("Error while posting edit performance.", err)
+            return res.status(500).json({error:"Internal server error."})
+        }
+    }
+    // delete performance
     async deletePerformance(req, res){
         try {
             const { perf_id } = req.query
@@ -355,6 +372,7 @@ export default class AdminController{
             </script>`)
         }
     }
+    // get feedback
     async getFeedback(req, res) {
         try {
             const user = req.userID
@@ -381,6 +399,7 @@ export default class AdminController{
             </script>`)
         }
     }
+    // get page to allocate performances
     async getAllocParticipation(req, res) {
         try {
             const alloc_by = await User.findById(req.userID)
@@ -400,6 +419,7 @@ export default class AdminController{
             </script>`)
         }
     }
+    //  allocate performances
     async postAllocParticipation(req, res) {
         try {
             const fromUser = req.userID;
