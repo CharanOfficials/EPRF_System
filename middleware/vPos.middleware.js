@@ -1,3 +1,4 @@
+//  validate podition data
 import { body, validationResult } from 'express-validator'
 
 export const posValidateRequest = async (req, res, next) => {

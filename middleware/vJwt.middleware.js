@@ -1,4 +1,4 @@
-// To implement user specific features
+// To implement user authentication
 
 import jwt from "jsonwebtoken"
 const jwtauth = (req, res, next) => {

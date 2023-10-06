@@ -1,3 +1,4 @@
+// validate signUp
 import { body, validationResult } from 'express-validator'
 import User from '../model/user.js'
 export const signUpValidateRequest = async (req, res, next) => {

@@ -1,4 +1,4 @@
-// To implement user specific features
+// To implement admin specific features
 
 import jwt from "jsonwebtoken"
 const validateAdmin = (req, res, next) => {
@@ -8,8 +8,8 @@ const validateAdmin = (req, res, next) => {
     if (!token) {
         return res.status(401)
             .send(`<script>
-                alert('Unauthorized request are not allowed');
-                    window.location.href = '/signIn';
+                alert('Unauthorized request are not allowed')
+                    window.location.href = '/signIn'
                     </script>`)
     }
     // If token then check validity
@@ -18,8 +18,8 @@ const validateAdmin = (req, res, next) => {
         if (payloadjwt.userType !== "admin") {
             return res.status(401)
                 .send(`<script>
-                alert('Unauthorized request are not allowed');
-                    window.location.href = '/employee/home';
+                alert('Unauthorized request are not allowed')
+                    window.location.href = '/employee/home'
                     </script>`)
         }
         req.userID = payloadjwt.userId
@@ -31,8 +31,8 @@ const validateAdmin = (req, res, next) => {
         console.log('JWT middleware:',err)
         return res.status(401)
                 .send(`<script>
-                alert('Unauthorized request are not allowed');
-                    window.location.href = '/signIn';
+                alert('Unauthorized request are not allowed')
+                    window.location.href = '/signIn'
                     </script>`)
     }
 }

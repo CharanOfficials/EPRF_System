@@ -1,3 +1,4 @@
+// validate reset password data
 import { body, validationResult } from 'express-validator'
 export const resetValidateRequest = async (req, res, next) => {
     const specialCharacterRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;

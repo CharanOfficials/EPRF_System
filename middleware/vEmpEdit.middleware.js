@@ -1,3 +1,4 @@
+// to validate details of emp edit data
 import { body, validationResult } from 'express-validator'
 import User from '../model/user.js'
 export const empEditValidateRequest = async (req, res, next) => {

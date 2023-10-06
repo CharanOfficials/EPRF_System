@@ -39,6 +39,7 @@ $('#login').on('submit', function (e) {
     }
   })
 })
+//  forget password
 let resetFormWorking = false;
 $('#forgotPassword').on('submit', function (e) {
   e.preventDefault();
@@ -76,6 +77,7 @@ $('#forgotPassword').on('submit', function (e) {
     }
   })
 })
+// submit review
 $('#sub_rev').on('click', function (e) {
   e.preventDefault();
   let p_review = $('#p_review').val();
@@ -104,6 +106,7 @@ $('#sub_rev').on('click', function (e) {
     }
   });
 });
+// submit feedback
 $('#fed_btn').on('click', function (e) {
   e.preventDefault();
   let p_feed = $('#p_feed').val();
@@ -133,6 +136,7 @@ $('#fed_btn').on('click', function (e) {
     }
   });
 });
+// submit edited revies
 $('#sub_updated_rev').on('click', function (e) {
   e.preventDefault();
   let p_review = $('#p_review').val();
@@ -161,12 +165,14 @@ $('#sub_updated_rev').on('click', function (e) {
     }
   });
 });
+// control submit button on edit review page
 $('#edit_rev').on('click', function (e) {
   e.preventDefault();
   $(this).prop('disabled', true);
   $('#sub_updated_rev').prop('disabled', false);
   $('#p_review').prop('disabled', false);
 });
+// restrict multiselect
 $('#multiselect').on('change', function () {
   var selectedOptions = $(this).val();
   $('#multiselect option').prop('disabled', false);
@@ -175,18 +181,7 @@ $('#multiselect').on('change', function () {
     alert("Only two options can be selected")
   }
 });
-
-$(document).ready(function () {
-    var $dropdown = $('#dropdown');
-    var $multiselect = $('#multiselect');
-    $dropdown.on('change', function () {
-        var selectedOption = $(this).val();
-        var options = $multiselect.val();
-        if (options.includes(selectedOption)) {
-            alert('Allocated to is present in allocated.');
-        }
-    });
-});
+// validate and allocate performance
 $('#sub_allocation').on('click', function (e) {
   e.preventDefault();
   console.log("Clicked")
@@ -227,4 +222,13 @@ $('#sub_allocation').on('click', function (e) {
   });
 }
 });
-
+// On dropdoen change in peformance participation page
+let $dropdown = $('#dropdown');
+let $multiselect = $('#multiselect');
+$dropdown.on('change', function () {
+    var selectedOption = $(this).val();
+    var options = $multiselect.val();
+    if (options.includes(selectedOption)) {
+        alert('Allocated to is present in allocated.');
+    }
+});

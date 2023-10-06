@@ -32,9 +32,11 @@ router.get('/logout', (req, res) =>{
 })
 router.use('/admin', adminRouter)
 router.use('/employee', employeeRouter)
+// home page
 router.get('/', (req, res) => {
     res.render('home')
 })
+// invalid page redirects
 router.use('/', (req, res) => {
     res.status(404);
     res.send(`

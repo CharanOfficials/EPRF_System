@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-
+//  encrypt generated password
 async function crypt(password) {
   try {
     const saltRounds = 5;
@@ -10,7 +10,7 @@ async function crypt(password) {
     return null;
   }
 }
-
+// generate password
 const passGen = function generateRandomPassword(length) {
   const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
   let password = "";

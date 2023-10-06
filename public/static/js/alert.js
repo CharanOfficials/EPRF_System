@@ -1,3 +1,4 @@
+// submit department
 $('#dept_form').submit(function (event) {
     event.preventDefault();
     $.ajax({
@@ -16,6 +17,7 @@ $('#dept_form').submit(function (event) {
       }
     });
 });
+// submit positions
 $('#posi_form').submit(function (event) {
   event.preventDefault();
   $.ajax({
@@ -43,6 +45,7 @@ $('#posi_form').submit(function (event) {
     }
   });
 });
+// submit add employee
 $('#add_emp_form').submit(function (event) {
   event.preventDefault();
   $.ajax({
@@ -61,6 +64,7 @@ $('#add_emp_form').submit(function (event) {
     }
   });
 });
+// submit edit employee
 $('#edit_emp_form').submit(function (event) {
   event.preventDefault();
   console.log("clicked")
@@ -81,30 +85,29 @@ $('#edit_emp_form').submit(function (event) {
     }
   });
 });
-$(document).ready(function() {
-  $('#dept').change(function() {
-    const selectedDepartmentId = $(this).val();
-    const positionSelect = $('#posi');
-    // Clear previous options
-    positionSelect.empty();
+// singn up page real time departments and positions loading
+$('#dept').change(function() {
+  const selectedDepartmentId = $(this).val();
+  const positionSelect = $('#posi');
+  // Clear previous options
+  positionSelect.empty();
 
-    // Send an AJAX request to fetch positions for the selected department
-    $.ajax({
-      type: 'GET',
-      url: `/admin/getPositions?departmentId=${selectedDepartmentId}`, // Adjust the API endpoint
-      success: function (positions) {
-        // Populate position options from the AJAX response
-        $.each(positions, function (index, position) {
-          positionSelect.append($('<option>', {
-            value: position._id,
-            text: position.pos_name
-          }));
-        });
-      },
-      error: function (xhr) {
-      let response = JSON.parse(xhr.responseText);
-      alert(response.error);
-      }
-    });
+  // Send an AJAX request to fetch positions for the selected department
+  $.ajax({
+    type: 'GET',
+    url: `/admin/getPositions?departmentId=${selectedDepartmentId}`, // Adjust the API endpoint
+    success: function (positions) {
+      // Populate position options from the AJAX response
+      $.each(positions, function (index, position) {
+        positionSelect.append($('<option>', {
+          value: position._id,
+          text: position.pos_name
+        }));
+      });
+    },
+    error: function (xhr) {
+    let response = JSON.parse(xhr.responseText);
+    alert(response.error);
+    }
   });
 });

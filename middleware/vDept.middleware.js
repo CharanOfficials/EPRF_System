@@ -1,3 +1,4 @@
+// to validate dept data
 import { body, validationResult } from 'express-validator'
 export const deptValidateRequest = async (req, res, next) => {
     const rules = [

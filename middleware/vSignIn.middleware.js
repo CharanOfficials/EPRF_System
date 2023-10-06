@@ -1,4 +1,5 @@
-import {body, validationResult} from 'express-validator'
+// validate sign In
+import { body, validationResult } from 'express-validator'
 export const loginValidateRequest = async (req, res, next) => {
     const rules = [
         body('account_type', "Invalid user type.").custom((value) => {

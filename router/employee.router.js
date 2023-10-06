@@ -1,7 +1,7 @@
 import express from 'express'
 import EmployeeController from '../controller/employee.controller.js'
 import validateEmployee from '../middleware/vEmployee.middleware.js'
-import {validateEmp} from '../middleware/vUserId.middleware.js'
+
 const router = express.Router()
 const employeeController = new EmployeeController()
 

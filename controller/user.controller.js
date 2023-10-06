@@ -6,11 +6,13 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 // import jwt from 'jsonwebtoken'
 export default class UserController{
+    // get sign in
     getSignIn(req, res) {
         res.render('sign_in', {
             title:'Sign In'
         })
     }  
+    // sign in user and redirect page on the basis of user type and initiate session
     async postSignIn(req, res) {
         try {
             const {email, password, account_type} = req.body
@@ -47,6 +49,7 @@ export default class UserController{
             return res.status(500).json({error:"Internal server error."})
         }
     }
+    // get signuppage with position and department name
     async getSignUp(req, res) {
         try {
             const department = await Dept.find()
@@ -63,6 +66,7 @@ export default class UserController{
             </script>`)
         }
     }
+    // signup user
     async postSignUp(req, res) {
         try {
             const password = passGen.passGen(12)
@@ -97,11 +101,13 @@ export default class UserController{
             return res.status(500).json({error:"Internal server error."})
         }
     }
+    // get reset password page
     getResetPassword(req, res) {
         return res.render('forgot_password', {
             title:"Forgot Password"
         })
     }
+    // reset password
     async postResetPassword(req, res) {
         try {
             const email = (req.body.email).trim()
@@ -121,6 +127,7 @@ export default class UserController{
             return res.status(500).json({error:"Internal server error."})
         }
     }
+    // logout and clear session
     async postLogout(req, res) {
         req.session.destroy((err) => {
             if (err) {

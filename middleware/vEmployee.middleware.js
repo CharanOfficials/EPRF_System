@@ -1,4 +1,4 @@
-// To implement user specific features
+// To implement employee specific features
 
 import jwt from "jsonwebtoken"
 const validateEmployee = (req, res, next) => {

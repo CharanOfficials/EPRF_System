@@ -1,3 +1,4 @@
+// to validate department and position data availability
 import Dept from '../model/department.js';
 import Pos from '../model/position.js';
 

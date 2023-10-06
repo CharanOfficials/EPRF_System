@@ -1,3 +1,4 @@
+// validate user id when user id received in query params
 import User from '../model/user.js'
 export const validateEmp = async (req, res, next) => {
     const {userid} = req.query
