@@ -7,6 +7,7 @@ const loginExists = (req, res, next) => {
     // If no token then send invalid token
     if (!token) {
         next()
+        return
     }
     // If token then check validity
     try {

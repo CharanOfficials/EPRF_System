@@ -20,7 +20,7 @@ export const signUpValidateRequest = async (req, res, next) => {
         .withMessage("Contact number should be between 10 and 15 characters."),
     body('empid')
         .isLength({ min: 12, max: 18 })
-        .withMessage("Employee ID should be between 15 and 18 characters."),
+        .withMessage("Employee ID should be between 12 and 18 characters."),
     body('dob')
         .isDate()
         .withMessage("Invalid date of birth. It should be <= 2000-01-01")
