@@ -25,19 +25,21 @@
                     <div class="emp">Performance Review</div>
                 </div>
                 <div>
-                    <textarea cols="30" rows="8" disabled><%=performance.content%></textarea>
+                    <textarea cols="80" rows="8" disabled><%=performance.content%></textarea>
                 </div>
             </div>
         </div>
         <div class="feedback">
             <div class="sub_feedback">
-                <label>Feedback:</label>
-                <%if(performance.feedback){%>
-                    <textarea name="feedback" cols="40" rows="4" disabled><%=performance.feedback.content%></textarea>
-                    <%}else{%>
-                        <textarea name="feedback" id="p_feed" cols="40" rows="4"></textarea>
-                        <div><button id="fed_btn">Submit</button></div>
-                <%}%>
+                <label>Feedback</label>
+            </div>
+            <div class="feed_submit">
+            <%if(performance.feedback){%>
+                <textarea name="feedback" cols="80" rows="4" disabled><%=performance.feedback.content%></textarea>
+                <%}else{%>
+                    <textarea name="feedback" id="p_feed" cols="80" rows="4"></textarea>
+                    <div><button id="fed_btn">Submit</button></div>
+                    <%}%>
             </div>
         </div>
     </div>

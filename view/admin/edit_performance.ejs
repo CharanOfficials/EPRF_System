@@ -29,16 +29,20 @@
                     <%}%>
                 </div>
                 <div>
-                    <textarea id="p_review" cols="30" rows="8" disabled><%=performance.content%></textarea></div>
+                    <textarea id="p_review" cols="80" rows="8" disabled><%=performance.content%></textarea></div>
                 </div>
         </div>
         <%if(performance.feedback){%>
-            <div class="feedback">
-                <div class="sub_feedback">
-                    <label>Feedback:</label>
-                    <textarea name="feedback" cols="40" rows="4" disabled></textarea>
-                    </div>
-                </div>
+
+        <div class="feedback">
+            <div class="sub_feedback">
+                <label>Feedback</label>
             </div>
+            <div class="feed_submit">
+                    <textarea name="feedback" cols="80" rows="4" disabled><%=performance.content%></textarea>
+            </div>
+        </div>
+
+
         <%}%>
 </main>

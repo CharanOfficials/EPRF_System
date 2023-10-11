@@ -1,66 +1,92 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
 $primary: #2196F3;
+
 * {
     box-sizing: border-box;
 }
-main{
-    min-height: 72vh;
-    overflow: scroll;
-    justify-content: center;
+button.navbar-toggler{
+    color: #d8e0e6;
 }
+.custom_menu{
+    margin-left: -2.1rem;
+    margin-right: 0.2rem;
+    li{
+        width: 13rem;
+        margin-left: 2.8rem;
+        // background-color: #2196F3;
+    }
+    button {
+        border: 1px solid $primary;
+    }
+}
+
+main {
+    min-height: 72vh;
+    overflow: auto;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+}
+
 main::-webkit-scrollbar {
     display: none;
 }
-.custom_table_outer_container{
+
+.custom_table_outer_container {
     overflow: scroll;
 }
 .custom_table {
-    max-width: 91vw;
-    margin-right: 2.6rem;
     min-width: 94vw;
-    margin-left: 3rem;
     align-self: center;
 }
-#custom_col{
+
+#custom_col {
     color: $primary;
-    a{
+
+    a {
         text-decoration: none;
     }
 }
+
 /* Styling header */
 header {
     display: flex;
     justify-content: center;
-    div{
+
+    div {
         letter-spacing: 0.1rem;
         color: $primary;
         width: 30vw;
         margin-top: 0.5rem;
         position: relative;
-        margin-left: 4rem;
+        text-align: center;
     }
 }
+
 // Header media
 @media(max-width:1200px) {
     header div {
         width: 33vw;
     }
 }
-@media(max-width:992px){
+
+@media(max-width:992px) {
     header div {
-            width: 36vw;
-        }
+        width: 36vw;
+    }
 }
+
 @media(max-width:768px) {
     header div {
         width: 45vw;
     }
 }
+
 @media(max-width:576px) {
     header div {
         width: 60vw;
     }
 }
+
 .typewriter {
     overflow: hidden;
     border-right: 0.15rem solid $primary;
@@ -70,13 +96,15 @@ header {
         typing 5s ease-in-out infinite,
         blink-caret .75s step-end infinite;
 }
+
 .no-select {
     user-select: none;
 }
+
 /* The typing effect */
 @keyframes typing {
     0% {
-        width: 76%
+        width: 80%
     }
 
     25% {
@@ -88,12 +116,13 @@ header {
     }
 
     100% {
-        width: 76%;
+        width: 80%;
     }
 }
 
 /* The typewriter cursor effect */
 @keyframes blink-caret {
+
     from,
     to {
         border-color: transparent
@@ -103,21 +132,25 @@ header {
         border-color: $primary;
     }
 }
-.custom_menu{
+
+.custom_menu {
     color: $primary;
 }
-.custom_menu:hover{
+
+.custom_menu:hover {
     color: $primary;
     background-color: rgb(212, 233, 237);
 }
-footer{
+
+footer {
     display: flex;
     color: $primary;
     height: 5vh;
     align-items: center;
     justify-content: center;
 }
-.pos-outer-container{
+
+.pos-outer-container {
     margin-top: 2rem;
     min-height: 70vh;
     background-color: #fcfcfd;
@@ -127,16 +160,20 @@ footer{
     color: $primary;
     font-size: 1.2rem;
     padding: 0;
-        div {
-            display: flex;
-            flex-direction: column;
-            width: 60vw;
-            height: 100%;   
+
+    div {
+        display: flex;
+        flex-direction: column;
+        width: 60vw;
+        height: 100%;
+
         div {
             font-size: 1.2rem;
             display: flex;
             justify-content: space-around;
-            select,input{
+
+            select,
+            input {
                 background-color: transparent;
                 color: $primary;
                 border: none;
@@ -145,11 +182,13 @@ footer{
                 font-size: 1.2rem;
                 height: 1.9rem;
             }
-            input{
+
+            input {
                 padding-bottom: 0.8rem;
             }
         }
     }
+
     button {
         height: 2.6rem;
         width: 15rem;
@@ -161,59 +200,67 @@ footer{
         font-size: 1.4rem;
     }
 }
+
 .outer-container {
+    // border: 1px solid black;
     margin-top: 1.5rem;
     min-height: 70vh;
     display: flex;
     justify-content: center;
     color: $primary;
     font-size: 1.2rem;
-    div{
+    div {
         display: flex;
         flex-direction: column;
         width: 70rem;
-    div{
-        // margin-top: 1.2rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        div{
+
+        div {
+            // margin-top: 1.2rem;
             display: flex;
-            flex-direction: column;
-            justify-content: left;
-            width: 27rem;
-            padding: 1rem;
-            input, label{
-                height: 1.9rem;
-                color: $primary;
-                margin-bottom: 1rem;
-            }
-            input{
-                outline: none;
-                border: none;
-                font-size: 1.2rem;
-                border-bottom: #2196F3 0.2rem solid;
-                background-color: transparent;
-            }
-            input {
-                padding-bottom: 0.8rem;
-            }
-            select{
-                color: $primary;
-                background-color: transparent;
-                border: none;
-                outline: none;
-                font-size: 1.2rem;
-                height: 1.8rem;
-                border-bottom: #2196F3 0.2rem solid;
-            }
-            label{
-                margin-right: 2rem;
+            flex-direction: row;
+            justify-content: space-around;
+
+            div {
+                display: flex;
+                flex-direction: column;
+                justify-content: left;
+                padding: 1rem;
+
+                input,
+                label {
+                    height: 1.9rem;
+                    color: $primary;
+                    margin-bottom: 1rem;
+                }
+
+                input {
+                    outline: none;
+                    border: none;
+                    font-size: 1.2rem;
+                    border-bottom: #2196F3 0.2rem solid;
+                    background-color: transparent;
+                    padding-bottom: 0.8rem;
+                }
+                select {
+                    color: $primary;
+                    background-color: transparent;
+                    border: none;
+                    outline: none;
+                    font-size: 1.2rem;
+                    height: 1.8rem;
+                    border-bottom: #2196F3 0.2rem solid;
+                }
+
+                label {
+                    margin-right: 2rem;
+                }
             }
         }
     }
-    }
+
     button {
+        margin-left: 1rem;
+        margin-bottom: 2rem;
         height: 3rem;
         width: 15rem;
         background-color: transparent;
@@ -224,94 +271,95 @@ footer{
         font-size: 1.4rem;
     }
 }
-.outer-container{
+
+.outer-container {
     overflow: scroll;
 }
+
 .outer-container::-webkit-scrollbar {
     display: none;
 }
+
 /* Styles for screens with a maximum width of 768px */
 @media (max-width: 992px) {
     .outer-container {
-            margin-top: 1.5rem;
-            min-height: 70vh;
+        margin-top: 1.5rem;
+        min-height: 70vh;
+        display: flex;
+        justify-content: center;
+        color: $primary;
+        font-size: 1.2rem;
+
+        div {
             display: flex;
-            justify-content: center;
-            color: $primary;
-            font-size: 1.2rem;
+            flex-direction: column;
+            width: 100%;
 
             div {
+                // margin-top: 1.2rem;
                 display: flex;
                 flex-direction: column;
-                width: 100%;
-
                 div {
-                    // margin-top: 1.2rem;
                     display: flex;
                     flex-direction: column;
-                    // align-items: center;
-                    // justify-content: space-around;
-                    div {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: left;
-                        // width: 27rem;
-                        padding: 1rem;
+                    justify-content: left;
+                    // width: 27rem;
+                    padding: 1rem;
 
-                        input,
-                        label {
-                            height: 1.8rem;
-                            color: $primary;
-                            margin-bottom: 1rem;
-                        }
+                    input,
+                    label {
+                        height: 1.8rem;
+                        color: $primary;
+                        margin-bottom: 1rem;
+                    }
 
-                        input {
-                            outline: none;
-                            border: none;
-                            font-size: 1.2rem;
-                            border-bottom: #2196F3 0.2rem solid;
-                            background-color: transparent;
-                        }
+                    input {
+                        outline: none;
+                        border: none;
+                        font-size: 1.2rem;
+                        border-bottom: #2196F3 0.2rem solid;
+                        background-color: transparent;
+                    }
 
-                        input {
-                            padding-bottom: 0.8rem;
-                        }
+                    input {
+                        padding-bottom: 0.8rem;
+                    }
 
-                        select {
-                            color: $primary;
-                            background-color: transparent;
-                            border: none;
-                            outline: none;
-                            font-size: 1.2rem;
-                            height: 1.8rem;
-                            border-bottom: #2196F3 0.2rem solid;
-                        }
+                    select {
+                        color: $primary;
+                        background-color: transparent;
+                        border: none;
+                        outline: none;
+                        font-size: 1.2rem;
+                        height: 1.8rem;
+                        border-bottom: #2196F3 0.2rem solid;
+                    }
 
-                        label {
-                            margin-right: 2rem;
-                        }
+                    label {
+                        margin-right: 2rem;
                     }
                 }
             }
-
-            button {
-                height: 3rem;
-                width: 15rem;
-                background-color: transparent;
-                border: none;
-                border: #2196F3 0.2rem solid;
-                color: $primary;
-                text-align: center;
-                font-size: 1.4rem;
-            }
         }
+
+        button {
+            height: 3rem;
+            width: 15rem;
+            background-color: transparent;
+            border: none;
+            border: #2196F3 0.2rem solid;
+            color: $primary;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+    }
 }
+
 body {
     font-family: "Open Sans", sans-serif;
     min-height: 95vh;
-    // background: url("../images/HgflTDf.jpg") 50% fixed;
-    // background-size: cover;
 }
+
 @keyframes spinner {
     0% {
         transform: rotateZ(0deg);
@@ -321,21 +369,22 @@ body {
         transform: rotateZ(359deg);
     }
 }
-.wrapper {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    min-height: 82vh;
-    // padding: 0 20px 0 20px;
-    background: rgba(darken($primary, 40%), 0.85);
-}
+
+// .wrapper {
+// display: flex;
+// align-items: center;
+// justify-content: center;
+// width: 100%;
+// min-height: 82vh;
+// padding: 0 20px 0 20px;
+// background: rgba(darken($primary, 40%), 0.85);
+// background-color: #8bc34a;
+// }
 .login {
     border-radius: 2px 2px 5px 5px;
     padding: 10px 20px 20px 20px;
-    width: 90%;
-    max-width: 320px;
+    // width: 50vw;
+    // max-width: 320px;
     background: #ffffff;
     position: relative;
     padding-bottom: 80px;
@@ -373,13 +422,15 @@ body {
         flex-direction: row;
         color: $primary;
         justify-content: space-between;
-
+        justify-items: center;
+        align-items: center;
         div {
             display: flex;
-            justify-content: space-between;
-
+            align-items: center;
+            justify-content: center;
             label {
                 margin-right: 1rem;
+                margin-bottom: 0.5rem;
             }
         }
     }
@@ -431,10 +482,10 @@ body {
     }
 
     .title {
-        color: #444;
+        color: $primary;
         font-size: 1.2em;
         font-weight: bold;
-        margin: 10px 0 30px 0;
+        margin: 10px 0 0 0;
         border-bottom: 1px solid #eee;
         padding-bottom: 20px;
     }
@@ -468,10 +519,10 @@ body {
             border-top-color: rgba(255, 255, 255, 0.3);
             border-radius: 100%;
             left: 50%;
-            top: 0;
+            top: 9rem;
             opacity: 0;
             margin-left: -20px;
-            margin-top: -20px;
+            margin-top: -25px;
             animation: spinner 0.6s infinite linear;
             transition: top 0.3s 0.3s ease,
                 opacity 0.3s 0.3s ease,
@@ -489,31 +540,36 @@ body {
         border-bottom-width: 4px;
     }
 }
-.main_login{
-    width: 93vw; 
+
+.main_login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 85vh;
-    margin-left: 3rem;
+    background-color: #afcfe9;
 }
-.performance{
+
+.performance {
     overflow: scroll;
-    height: 70vh;
-    width: 94vw;
-    margin-left: 3rem;
+    // height: 70vh;
+    // width: 94vw;
+    // margin-left: 3rem;
     // border: 1px blue solid;
     color: $primary;
-    .upper_outer{
+
+    .upper_outer {
         overflow: scroll;
         height: 70%;
-        width: 100%;
         display: flex;
-        // border: 1px blue solid;
+
         .emp {
             font-size: 1.5rem;
             font-weight: bold;
             margin-top: 1.2rem;
             text-align: center;
-            }
-        .user_details{
+        }
+
+        .user_details {
             overflow: scroll;
             width: 35%;
             height: 100%;
@@ -521,21 +577,25 @@ body {
             padding-left: 1.2rem;
             font-size: 1.2rem;
             letter-spacing: 0.1rem;
-            label{
+
+            label {
                 padding-bottom: 0.3rem;
             }
         }
-        .performance_review{
+
+        .performance_review {
             overflow: scroll;
-            height: 100%;
-            width: 65%;
+            // height: 100%;
+            // width: 65%;
             // border: 1px blue solid;
             text-align: center;
-            .sub_performance_review{
+
+            .sub_performance_review {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                button{
+
+                button {
                     border: none;
                     border: 1px solid $primary;
                     color: $primary;
@@ -546,10 +606,11 @@ body {
                     margin-top: 1.2rem;
                 }
             }
-            textarea{
+
+            textarea {
                 margin-top: 1rem;
-                width: 95%;
-                height: 95%;
+                // width: 95%;
+                // height: 95%;
                 border-color: $primary;
                 color: $primary;
                 outline-color: $primary;
@@ -557,184 +618,228 @@ body {
             }
         }
     }
+
     .feedback {
         overflow: scroll;
         width: 100%;
         height: 30%;
-        .sub_feedback{
+
+        .sub_feedback {
+            // border:1px solid #2196F3;
             display: flex;
-            textarea{
-                margin-top: 1rem;
-                margin-left: 1.5rem;
-                width: 78%;
-                height: 95%;
-                margin-right: 1.5rem;
-                border-color: $primary;
-                color: $primary;
-                outline-color: $primary;
-                font-size: 1.2rem;
-            }
+            margin: 1rem 0 1rem 0;
+            justify-content: center;
             label {
-                font-size: 1.5rem;
-                font-weight: bold;
-                margin-left: 1rem;
-                margin-top: 0.5rem;
-            }
-            button {
-                border: none;
-                border: 1px solid $primary;
-                color: $primary;
-                background-color: transparent;
-                outline: none;
-                font-size: 1.2rem;
-                margin-top: 75%;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    margin-left: 1rem;
+                    margin-top: 0.5rem;
             }
         }
+    }
+}
+.feed_submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    textarea {
+        // margin-top: 1rem;
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+        border-color: $primary;
+        color: $primary;
+        outline-color: $primary;
+        font-size: 1.2rem;
+    }
+
+    button {
+        border: none;
+        border: 1px solid $primary;
+        color: $primary;
+        background-color: transparent;
+        outline: none;
+        font-size: 1.2rem;
     }
 }
 @media (max-width: 992px) {
     .user_details {
         display: none;
     }
+    .performance_review{
+        textarea{
+            width: 98%;
+        }
+    }
 }
-textarea::-webkit-scrollbar{
+
+textarea::-webkit-scrollbar {
     display: none;
 }
+
 .performance::-webkit-scrollbar {
     display: none;
 }
-.performance_review::-webkit-scrollbar{
+
+.performance_review::-webkit-scrollbar {
     display: none;
 }
-.upper_outer::-webkit-scrollbar{
+
+.upper_outer::-webkit-scrollbar {
     display: none;
 }
-.user_details::-webkit-scrollbar{
+
+.user_details::-webkit-scrollbar {
     display: none;
 }
-.feedback::-webkit-scrollbar{
+
+.feedback::-webkit-scrollbar {
     display: none;
 }
-.bi, .feedback_img{
+
+.bi,
+.feedback_img {
     font-size: 1.2rem;
     color: $primary;
-    
+
 }
-.icon{
+
+.icon {
     text-align: center;
 }
-.overflow{
+
+.overflow {
     max-height: 5rem;
     max-width: 10rem;
     overflow-x: hidden;
     overflow-y: scroll;
 }
-.overflow::-webkit-scrollbar{
+
+.overflow::-webkit-scrollbar {
     display: none;
 }
-.allocate_perf{
+
+.allocate_perf {
     display: flex;
     // overflow: scroll;
     height: 60vh;
-    width: 94vw;
-    margin-left: 3rem;
+    // width: 94vw;
+    // margin-left: 3rem;
     color: $primary;
-        select {
-                border: none;
-                color: $primary;
-                background-color: transparent;
-                outline: none;
-                font-size: 1.2rem;
-                margin-top: 1.2rem;
-                text-align: center;
-                padding: 0.3rem;
-                width: 95%;
-        
-                option {
-                    color: $primary;
-                    white-space: pre-line;
-                    width: 95%;
-                    margin-bottom: 0.4rem;
-                    overflow: hidden;
-                    line-break: anywhere;
-                }
-        
-                option:checked {
-                    background-color: #c1d3e4;
-                }
-            }
-        .allocated_by{
-            width: 20%;
-            // border: 1px blue solid;
-            text-align: center;
-            overflow-x: hidden;
-            overflow-y: scroll;
+
+    select {
+        border: none;
+        color: $primary;
+        background-color: transparent;
+        outline: none;
+        font-size: 1.2rem;
+        margin-top: 1.2rem;
+        text-align: center;
+        padding: 0.3rem;
+        width: 95%;
+
+        option {
+            color: $primary;
+            white-space: pre-line;
+            width: 95%;
+            margin-bottom: 0.4rem;
+            overflow: hidden;
+            line-break: anywhere;
         }
-        .allocated_scroll{
-            overflow-x: hidden;
-            overflow-y: scroll;
+
+        option:checked {
+            background-color: #c1d3e4;
         }
-        .allocated{
-            width: 50%;
-            // border: 1px solid blue;
-            text-align: center;
+    }
+
+    .allocated_by {
+        width: 25%;
+        // border: 1px blue solid;
+        text-align: center;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .allocated_scroll {
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    .allocated {
+        width: 50%;
+        // border: 1px solid blue;
+        text-align: center;
+    }
+
+    .allocated_to {
+        width: 25%;
+        text-align: center;
+        // border: 1px solid blue;
+        text-align: center;
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        .custom-select {
+            width: 150px;
+            /* Set your desired width */
+            overflow: hidden;
+            /* Hide any overflowing text */
         }
-        .allocated_to{
-            width: 25%;
-            text-align: center;
-            // border: 1px solid blue;
-            text-align: center;
-            overflow-x: hidden;
-            overflow-y: scroll;
-            .custom-select {
-                    width: 150px;
-                    /* Set your desired width */
-                    overflow: hidden;
-                    /* Hide any overflowing text */
-                }
-            
-                /* Style for the option elements */
-            .custom-select option {
-                white-space: wrap;
-                /* Prevent text from wrapping within options */
-                overflow: hidden;
-                /* Hide any overflowing text within options */
-                text-overflow: ellipsis;
-                /* Display ellipsis (...) for overflowed text */
-            }
+
+        /* Style for the option elements */
+        .custom-select option {
+            white-space: wrap;
+            /* Prevent text from wrapping within options */
+            overflow: hidden;
+            /* Hide any overflowing text within options */
+            text-overflow: ellipsis;
+            /* Display ellipsis (...) for overflowed text */
         }
-        label{
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-}        
-#sub_allocation {
-    border: none;
-    border: 1px solid $primary;
-    color: $primary;
-    background-color: transparent;
-    outline: none;
-    font-size: 1.2rem;
-    margin-left: 47%;
-    margin-top: 1.2rem;
+    }
+
+    label {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
 }
-.select_mul::-webkit-scrollbar{
+
+.sub_allocation_btn {
+    // border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button{
+        border: none;
+        border: 1px solid $primary;
+        color: $primary;
+        background-color: transparent;
+        outline: none;
+        font-size: 1.2rem;
+        // margin-top: 1.2rem;
+    }
+}
+
+.select_mul::-webkit-scrollbar {
     display: none;
 }
-.allocated_to::-webkit-scrollbar{
+
+.allocated_to::-webkit-scrollbar {
     display: none;
 }
-.allocated_by::-webkit-scrollbar{
+
+.allocated_by::-webkit-scrollbar {
     display: none;
 }
-.allocated_scroll::-webkit-scrollbar{
+
+.allocated_scroll::-webkit-scrollbar {
     display: none;
 }
-.home_btn{
+
+.home_btn {
     text-align: center;
     font-size: 1.5rem;
     margin-bottom: 2.2rem;
-    a{
+
+    a {
         border: 1px solid $primary;
         padding: 0.5rem;
         text-decoration: none;
