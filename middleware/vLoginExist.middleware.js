@@ -18,6 +18,14 @@ const loginExists = (req, res, next) => {
             return res.send(`<script>window.location.href = '/employee/pendingfeedbacks'</script>`)
         }
     } catch (err) {
+        if (err.name === 'TokenExpiredError') {
+            // Handle token expiration error
+            next()
+            res.status(401).send(`<script>
+                alert('Token has expired. Please sign in again.');
+                </script>`);
+            return
+        }
         // else return error
         console.log('JWT middleware error while check the existing login:',err)
         return res.status(401)
