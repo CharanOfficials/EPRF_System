@@ -41,8 +41,6 @@ To set up the project, follow these steps:
 1. Create a `.env` file and set the following variables:
    - `JWT_SECRET`: Your secret key for authentication
    - `DB_URL`: Your MongoDB connection string
-   - `API_KEY`: Your adzuna API key for jobs API
-   - `APP_KEY`: Your adzuna app key for jobs API
 
 ## Admin Features
 
