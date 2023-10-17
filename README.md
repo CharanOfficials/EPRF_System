@@ -42,7 +42,7 @@ To set up the project, follow these steps:
    - `JWT_SECRET`: Your secret key for authentication
    - `DB_URL`: Your MongoDB connection string
 
-## Admin Features
+## Features
 
 ### Add Department
 - Create and manage departments within the organization.
@@ -68,6 +68,7 @@ The Employee Performance Review Feedback System offers a robust solution for eff
 
 # **Usage**
 
+## Employee Usage
 ### **Manage Employees**
 
 1. **Add Department:** Easily create new departments within the "Manage Employees" section.
@@ -106,7 +107,7 @@ The Employee Performance Review Feedback System offers a robust solution for eff
             3. **Allocated To:** The employees to whom those in the "Allocated" list are assigned for reviews.
         - Note: An employee in the "Allocated To" column can never be on the "Allocated" list to ensure fair and unbiased evaluations.
 
-## Employee Features
+## Employee Usage
 
 1. **Pending Feedbacks:**
          - Enable your employees to submit feedback on their own performance effortlessly. With this feature, employees can provide valuable insights and self-assessments, contributing to a more transparent and productive work environment.
