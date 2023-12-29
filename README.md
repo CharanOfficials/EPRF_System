@@ -29,7 +29,7 @@ The EPRF System offers two types of logins:
 
 To set up the project, follow these steps:
 
-1. **Clone the repository:** `git clone https://github.com/CharanOfficials/student_placement_report_gen/`
+1. **Clone the repository:** `git clone https://github.com/CharanOfficials/EPRF_System/`
 2. **Install dependencies:** Run `npm install`
 3. **Start the Server:** Run `npm start`
 
